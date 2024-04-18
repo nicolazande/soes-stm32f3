@@ -25,7 +25,7 @@ void spi_setup(void)
 {
 	/* data */
 	GPIO_InitTypeDef gpio = {0};
-	SPI_InitTypeDef *spi = &SpiHandle.Init;
+	SPI_InitTypeDef *cfg = &SpiHandle.Init;
 
 	/**
 	 * SPI1 GPIO Configuration:
@@ -51,15 +51,15 @@ void spi_setup(void)
 	HAL_GPIO_Init(GPIOA, &gpio);
 
 	/* SPI Configuration */
-	spi->Direction = SPI_DIRECTION_2LINES;
-	spi->DataSize = SPI_DATASIZE_8BIT;
-	spi->CLKPolarity = SPI_POLARITY_LOW;
-	spi->CLKPhase = SPI_PHASE_1EDGE;
-	spi->NSS = SPI_NSS_SOFT;
-	spi->BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2;
-	spi->FirstBit = SPI_FIRSTBIT_MSB;
-	spi->CRCCalculation = SPI_CRCCALCULATION_DISABLE;
-	spi->Mode = SPI_MODE_MASTER;
+	cfg->Direction = SPI_DIRECTION_2LINES;
+	cfg->DataSize = SPI_DATASIZE_8BIT;
+	cfg->CLKPolarity = SPI_POLARITY_LOW;
+	cfg->CLKPhase = SPI_PHASE_1EDGE;
+	cfg->NSS = SPI_NSS_SOFT;
+	cfg->BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2;
+	cfg->FirstBit = SPI_FIRSTBIT_MSB;
+	cfg->CRCCalculation = SPI_CRCCALCULATION_DISABLE;
+	cfg->Mode = SPI_MODE_MASTER;
 
 	/* initialize SPI */
 	HAL_SPI_Init(&SpiHandle);
