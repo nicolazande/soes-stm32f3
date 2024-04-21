@@ -136,7 +136,7 @@ int main(void)
 	/* Initialize all configured peripherals */
 	MX_GPIO_Init();
 
-	/* initialize ethercat slave */
+	/* initialize EtherCAT slave */
 	ecat_slv_init(&config);
 
 	while (1)
@@ -145,4 +145,3 @@ int main(void)
 		ecat_slv();
 	}
 }
-

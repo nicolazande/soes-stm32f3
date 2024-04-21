@@ -11,9 +11,9 @@
 /****************************************************************
  * Defines
  ****************************************************************/
-#define ESC_RCC_APB1PERIPH_GPIOX_RSTN   RCC_AHBENR_GPIOAEN
-#define ESC_GPIOX_RSTN                  GPIOA
-#define ESC_GPIO_Pin_RSTN               GPIO_PIN_2
+#define ESC_RCC_APB1PERIPH_GPIO_RSTN    RCC_AHBENR_GPIOAEN
+#define ESC_GPIO_RSTN                   GPIOA
+#define ESC_GPIO_PIN_RSTN               GPIO_PIN_2
 
 
 /****************************************************************

@@ -12,37 +12,40 @@
  * Defines
  ****************************************************************/
 /* STM32F3 */
-#define SCS_LOW                           0
-#define SCS_HIGH                          1
-#define SPIX_ESC                        SPI1
+#define SCS_LOW                         0
+#define SCS_HIGH                        1
+#define SPI_ESC                         SPI1
 #define ESC_RCC_APB2PERIPH_SPIX         RCC_APB2ENR_SPI1EN
-#define ESC_GPIOX_AF_SPIx               GPIO_AF5_SPI1
+#define ESC_GPIO_AF_SPI                 GPIO_AF5_SPI1
 #define ESC_RCC_APB1PERIPH_GPIOX_CTRL   RCC_AHBENR_GPIOAEN
-#define ESC_GPIOX_CTRL                  GPIOA
-#define ESC_GPIO_Pin_SCK                GPIO_PIN_5
-#define ESC_GPIO_PinSourceSCK           GPIO_PIN_SOURCE_5
-#define ESC_GPIO_Pin_MISO               GPIO_PIN_6
-#define ESC_GPIO_PinSource_MISO         GPIO_PIN_SOURCE_6
-#define ESC_GPIO_Pin_MOSI               GPIO_PIN_7
-#define ESC_GPIO_PinSource_MOSI         GPIO_PIN_SOURCE_7
-#define ESC_RCC_APB1PERIPH_GPIOX_CS     RCC_AHBENR_GPIOAEN
-#define ESC_GPIOX_CS                    GPIOA
-#define ESC_GPIO_Pin_CS                 GPIO_PIN_4
-#define DUMMY_BYTE 0xFF
-#define tout 5000
+#define ESC_GPIO_CTRL                   GPIOA
+#define ESC_GPIO_PIN_SCK                GPIO_PIN_5
+#define ESC_GPIO_PIN_MISO               GPIO_PIN_6
+#define ESC_GPIO_PIN_MOSI               GPIO_PIN_7
+#define ESC_GPIO_CS                     GPIOA
+#define ESC_GPIO_PIN_CS                 GPIO_PIN_4
+#define ESC_SPI_CLK_ENABLE()			__HAL_RCC_SPI1_CLK_ENABLE()
+#define ESC_SPI_SCK_GPIO_CLK_ENABLE()   __HAL_RCC_GPIOA_CLK_ENABLE()
+#define ESC_SPI_MISO_GPIO_CLK_ENABLE()	__HAL_RCC_GPIOA_CLK_ENABLE()
+#define ESC_SPI_MOSI_GPIO_CLK_ENABLE()	__HAL_RCC_GPIOA_CLK_ENABLE()
+#define ESC_SPI_FORCE_RESET()           __HAL_RCC_SPI1_FORCE_RESET()
+#define ESC_SPI_RELEASE_RESET()         __HAL_RCC_SPI1_RELEASE_RESET()
 
 /* LAN9252 */
-#define SPIX_ESC_SCS                    SPI_NSS_SOFT
-#define SCS_ACTIVE_POLARITY             SCS_LOW
-#define SPIX_ESC_CPOL                   SPI_POLARITY_LOW
-#define SPIX_ESC_CPHA                   SPI_PHASE_1EDGE
+#define SPI_ESC_SCS                    SPI_NSS_SOFT
+#define SCS_ACTIVE_POLARITY            SCS_LOW
+#define SPI_ESC_CPOL                   SPI_POLARITY_LOW
+#define SPI_ESC_CPHA                   SPI_PHASE_1EDGE
 
 
 /****************************************************************
  * Public functions
  ****************************************************************/
-/** setup SPI according to application settings */
+/** setup SPI */
 void spi_setup(void);
+
+/** de-initialize SPI */
+void spi_deinit(void);
 
 /** select SPI (low) */
 void spi_select(int8_t board);
