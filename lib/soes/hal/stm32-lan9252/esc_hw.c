@@ -67,21 +67,34 @@
 #define ESC_HW_CFG_REG           0x074
 #define ESC_READY                BIT(27)
 
-
 static int lan9252 = -1;
 
 /* lan9252 singel write */
 static void lan9252_write_32 (uint16_t address, uint32_t val)
 {
+	/* SPI data */
     uint8_t data[7];
 
+    /* command code */
     data[0] = ESC_CMD_SERIAL_WRITE;
+
+#ifndef __ARMEB__
+    /* little endian */
     data[1] = ((address >> 8) & 0xFF);
     data[2] = (address & 0xFF);
     data[3] = (val & 0xFF);
     data[4] = ((val >> 8) & 0xFF);
     data[5] = ((val >> 16) & 0xFF);
     data[6] = ((val >> 24) & 0xFF);
+#else
+    /* big endian */
+    data[1] = (address & 0xFF);
+    data[2] = ((address >> 8) & 0xFF);
+    data[3] = ((val >> 24) & 0xFF);
+    data[4] = ((val >> 16) & 0xFF);
+    data[5] = ((val >> 8) & 0xFF);
+    data[6] = (val & 0xFF);
+#endif
 
     /* Select device. */
     spi_select (lan9252);
@@ -96,6 +109,7 @@ static uint32_t lan9252_read_32 (uint32_t address)
 {
    uint8_t data[4];
    uint8_t result[4];
+   uint32_t ret;
 
    data[0] = ESC_CMD_FAST_READ;
    data[1] = ((address >> 8) & 0xFF);
@@ -110,10 +124,17 @@ static uint32_t lan9252_read_32 (uint32_t address)
    /* Un-select device. */
    spi_unselect (lan9252);
 
-   return ((result[3] << 24) |
-           (result[2] << 16) |
-           (result[1] << 8) |
-            result[0]);
+#ifndef __ARMEB__
+   /* little endian */
+   ret = (result[3] << 24) | (result[2] << 16) |
+		 (result[1] << 8)  | (result[0]);
+#else
+   /* big endian */
+   ret = (result[0] << 24) | (result[1] << 16) |
+   		 (result[2] << 8)  | (result[3]);
+#endif
+
+   return ret;
 }
 
 /* ESC read CSR function */
