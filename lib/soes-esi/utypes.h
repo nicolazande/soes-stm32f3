@@ -18,7 +18,7 @@ struct rtd_t
 	uint16_t low_fault;
 	uint16_t fault_status;
 	uint8_t filter;
-	/** TODO: rename the following fields */
+	/** TODO: rename the following fields (also in objectlist.c) */
 	float val_2;
 	float val_3;
 	float val_4;
@@ -41,7 +41,7 @@ struct imu_t
 	float wx;
 	float wy;
 	float wz;
-	/** TODO: rename the following fields */
+	/** TODO: rename the following fields (also in objectlist.c) */
 	float val_1;
 };
 
@@ -77,7 +77,7 @@ struct power_t
 typedef struct
 {
     struct rtd_t rtd[25]; //RTD sensor
-    struct imu_t imu; //IMU
+    struct imu_t imu[1]; //IMU
     struct photo_t photo[4]; //Photo diode
     struct pyro_t pyro[2]; //Pyrometer
     struct led_t led[8]; //Led

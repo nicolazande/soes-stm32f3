@@ -105,10 +105,7 @@ void Error_Handler(void)
 	while (1){}
 }
 
-void cb_get_inputs()
-{
-    Obj.Counter++;
-}
+void cb_get_inputs(){}
 
 void cb_set_outputs(){}
 
@@ -122,6 +119,10 @@ void assert_failed(uint8_t *file, uint32_t line)
 }
 #endif /* USE_FULL_ASSERT */
 
+
+/****************************************************************
+ * Application
+ ****************************************************************/
 int main(void)
 {
 	/**
