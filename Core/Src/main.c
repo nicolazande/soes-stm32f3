@@ -13,7 +13,11 @@
 /* CANopen Object Dictionary */
 _Objects Obj;
 
-/* SOES configuration */
+/**
+ * SOES configuration.
+ * TODO: implement task specific function and specify
+ * 		 here the address if needed.
+ */
 static esc_cfg_t config =
 {
     .user_arg = "/dev/lan9252",
@@ -39,28 +43,19 @@ static esc_cfg_t config =
  * Private function prototypes
  ****************************************************************/
 /** system clock configuration */
-void SystemClock_Config(void);
+static void SystemClock_Config(void);
 
 /** GPIO initialization function */
 static void MX_GPIO_Init(void);
 
 /** This function is executed in case of error occurrence */
-void Error_Handler(void);
-
-/* read inputs */
-void cb_get_inputs();
-
-/* set outputs */
-void cb_set_outputs();
-
-/* set failure */
-void assert_failed(uint8_t *file, uint32_t line);
+static void Error_Handler(void);
 
 
 /****************************************************************
  * Private function
  ****************************************************************/
-void SystemClock_Config(void)
+static void SystemClock_Config(void)
 {
 	RCC_OscInitTypeDef RCC_OscInitStruct = {0};
 	RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
@@ -98,26 +93,31 @@ static void MX_GPIO_Init(void)
 	__HAL_RCC_GPIOA_CLK_ENABLE();
 }
 
-void Error_Handler(void)
+static void Error_Handler(void)
 {
 	/* disable implementation to report the HAL error return state */
 	__disable_irq();
 	while (1){}
 }
 
+
+/****************************************************************
+ * Public functions
+ ****************************************************************/
+/**
+ * Read physical input values and assigns the corresponding members
+ * in the CANopen object dictionary so that the slave can send that
+ * info back to the master with TXPDO or SDO.
+ * TODO: implement it according to application requirements.
+ */
 void cb_get_inputs(){}
 
-void cb_set_outputs(){}
-
-#ifdef  USE_FULL_ASSERT
 /**
- * Reports the name of the source file and the source line number
- * where the assert_param error has occurred.
+ * Write physical output values from the corresponding members of
+ * the CANopen object dictionary (i.e. set DO, PWM, ...).
+ * TODO: implement it according to application requirements.
  */
-void assert_failed(uint8_t *file, uint32_t line)
-{
-}
-#endif /* USE_FULL_ASSERT */
+void cb_set_outputs(){}
 
 
 /****************************************************************
@@ -142,7 +142,7 @@ int main(void)
 
 	while (1)
 	{
-		/* run slave login (polling mode) */
+		/* run slave logic (polling mode) */
 		ecat_slv();
 	}
 }

@@ -2,20 +2,20 @@
 <EtherCATInfo>
   <Vendor>
     <Id>0</Id>
-    <Name LcId="1033">Unspecified</Name>
+    <Name LcId="1033">Cat Rock Systems</Name>
   </Vendor>
   <Descriptions>
     <Groups>
       <Group>
-        <Type>DigIn</Type>
-        <Name LcId="1033">Digital input/output</Name>
+        <Type>lan9252_spi</Type>
+        <Name LcId="1033">lan9252</Name>
       </Group>
     </Groups>
     <Devices>
       <Device Physics="YY ">
-        <Type ProductCode="#xab123" RevisionNo="#x1">LAN9252 STM32</Type>
-        <Name LcId="1033">LAN9252 SPI</Name>
-        <GroupType>DigIn</GroupType>
+        <Type ProductCode="#xab123" RevisionNo="#x1">lan9252</Type>
+        <Name LcId="1033">lan9252</Name>
+        <GroupType>lan9252_spi</GroupType>
         <Profile>
           <ProfileNo>5001</ProfileNo>
           <AddInfo>0</AddInfo>
