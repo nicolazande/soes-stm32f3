@@ -207,6 +207,7 @@ V4.00 ECAT 7: The return values for the AL-StatusCode were changed to UINT16
 #include "ecatappl.h"
 
 
+#include    "bootmode.h"
 
 
 
@@ -215,6 +216,7 @@ V4.00 ECAT 7: The return values for the AL-StatusCode were changed to UINT16
 #include "ecatcoe.h"
 #include "objdef.h"
 
+#include    "emcy.h"
 
 
 /*ECATCHANGE_START(V5.13) CIA402 3*/
@@ -235,10 +237,10 @@ V4.00 ECAT 7: The return values for the AL-StatusCode were changed to UINT16
 UINT16    u16ALEventMask;                      // Value which will be written to the 0x204 register (AL event mask) during the state transition PreOP to SafeOP
 
 /*Dummy variable to trigger read or writes events in the ESC*/
-    VARVOLATILE UINT16    u16dummy;
+    VARVOLATILE UINT32    u32dummy;
 
 
-        VARVOLATILE UINT16 SMActivate = 0;
+        VARVOLATILE UINT32 SMActivate = 0;
 
 TSYNCMAN		SyncManInfo;
 
@@ -263,16 +265,15 @@ void ResetALEventMask(UINT16 intMask);
 *////////////////////////////////////////////////////////////////////////////////////////
 void ResetALEventMask(UINT16 intMask)
 {
-    UINT16 mask;
-    HW_EscReadWord(mask, ESC_AL_EVENTMASK_OFFSET);
-    
-    mask &= intMask;
+    UINT32 u32Mask = 0;
+    HW_EscReadDWord(u32Mask, ESC_AL_EVENTMASK_OFFSET);
+    u32Mask &= (UINT32)intMask;
+
 
 
     DISABLE_ESC_INT();
 
-
-    HW_EscWriteWord(mask, ESC_AL_EVENTMASK_OFFSET);
+    HW_EscWriteDWord(u32Mask, ESC_AL_EVENTMASK_OFFSET);
     ENABLE_ESC_INT();
 }
 
@@ -284,16 +285,14 @@ void ResetALEventMask(UINT16 intMask)
 *////////////////////////////////////////////////////////////////////////////////////////
 void SetALEventMask(UINT16 intMask)
 {
-    UINT16 mask;
-    HW_EscReadWord(mask, ESC_AL_EVENTMASK_OFFSET);
-    
+    UINT32 u32Mask = 0;
+    HW_EscReadDWord(u32Mask, ESC_AL_EVENTMASK_OFFSET);
+    u32Mask |= (UINT32)intMask;
 
-    mask |= intMask;
 
     DISABLE_ESC_INT();
 
-
-    HW_EscWriteWord(mask, ESC_AL_EVENTMASK_OFFSET);
+    HW_EscWriteDWord(u32Mask, ESC_AL_EVENTMASK_OFFSET);
     ENABLE_ESC_INT();
 }
 
@@ -305,10 +304,10 @@ void SetALEventMask(UINT16 intMask)
 *////////////////////////////////////////////////////////////////////////////////////////
 void UpdateEEPROMLoadedState(void)
 {
-    UINT16 TmpVar = 0;
-    //read EEPROM loaded information
-    HW_EscReadWord(TmpVar, ESC_EEPROM_CONTROL_OFFSET);
-    TmpVar = SWAPWORD(TmpVar);
+   UINT32 TmpVar = 0;
+   //read EEPROM loaded information
+   HW_EscReadDWord(TmpVar, ESC_EEPROM_CONFIG_OFFSET);
+   TmpVar = SWAPDWORD(TmpVar);
 
 
     if (((TmpVar & ESC_EEPROM_ERROR_CRC) > 0)
@@ -358,17 +357,17 @@ TSYNCMAN ESCMEM * GetSyncMan( UINT8 channel )
 void DisableSyncManChannel(UINT8 channel)
 {
     UINT16 Offset;
-    //The register 0x806 is only readable from PDI => writing 0 is valid
-    VARVOLATILE UINT16 smStatus = SM_SETTING_PDI_DISABLE;
-    Offset = (ESC_SYNCMAN_ACTIVE_OFFSET + (SIZEOF_SM_REGISTER*channel));
+    //The registers from 0x804 to 0x806 are only readable from PDI => writing 0 for all registers is valid
+    VARVOLATILE UINT32 smStatus = SM_SETTING_PDI_DISABLE;
+    Offset = (ESC_SYNCMAN_CONTROL_OFFSET + (SIZEOF_SM_REGISTER*channel));
+
+    HW_EscWriteDWord(smStatus,Offset);
 
 
-    HW_EscWriteWord(smStatus,Offset);
-    
     /*wait until SyncManager is disabled*/
     do
     {
-        HW_EscReadWord(smStatus, Offset);
+        HW_EscReadDWord(smStatus, Offset);
     }while(!(smStatus & SM_SETTING_PDI_DISABLE));
 }
 
@@ -381,21 +380,151 @@ void DisableSyncManChannel(UINT8 channel)
 void EnableSyncManChannel(UINT8 channel)
 {
     UINT16 Offset;
-    //The register 0x806 is only readable from PDI => writing 0 is valid
-    VARVOLATILE UINT16 smStatus = 0x0000;
-    Offset = (ESC_SYNCMAN_ACTIVE_OFFSET + (SIZEOF_SM_REGISTER*channel));
+    //The registers from 0x804 to 0x806 are only readable from PDI => writing 0 for all registers is valid
+    VARVOLATILE UINT32 smStatus = 0x00000000;
+    Offset = (ESC_SYNCMAN_CONTROL_OFFSET + (SIZEOF_SM_REGISTER*channel));
 
 
-    HW_EscWriteWord(smStatus,Offset);
-    
+
+    HW_EscWriteDWord(smStatus,Offset);
+
     /*wait until SyncManager is enabled*/
     do
     {
-        HW_EscReadWord(smStatus,Offset);
-
+        HW_EscReadDWord(smStatus,Offset);
     }while((smStatus & SM_SETTING_PDI_DISABLE));
 }
 
+
+/////////////////////////////////////////////////////////////////////////////////////////
+/**
+ \param  channel        SM channel
+ \param  faultyCode        faulty SM channel word
+
+ \brief    This function sends an emergency when SM channel check failed
+
+*////////////////////////////////////////////////////////////////////////////////////////
+
+void    SendSmFailedEmergency(UINT8 channel, UINT8 faultyCode)
+{
+    TEMCYMESSAGE EMCYMEM *    pEmcy    = EMCY_GetEmcyBuffer();
+
+
+    if ( pEmcy )
+    {
+
+        /* Emergency buffer is available, the faultyCode gives the information about the error reason
+           and has to be decremented to match the following definitions:
+             8: Sync Manager 2 does not support an odd address
+             9: Address of Sync Manager 2 is not supported
+            10: Size of Sync Manager 2 is not supported
+            11: Settings of Sync Manager 2 are not supported
+            12: Sync Manager 3 does not support an odd address
+            13: Address of Sync Manager 3 is not supported
+            14: Size of Sync Manager 3 is not supported
+            15: Settings of Sync Manager 3 are not supported
+            16: Sync Manager 4 does not support an odd address
+            17: Address of Sync Manager 4 is not supported
+            18: Size of Sync Manager 4 is not supported
+            19: Settings of Sync Manager 4 are not supported
+            20: Sync Manager 5 does not support an odd address
+            21: Address of Sync Manager 5 is not supported
+            22: Size of Sync Manager 5 is not supported
+            23: Settings of Sync Manager 5 are not supported
+            24: Sync Manager 6 does not support an odd address
+            25: Address of Sync Manager 6 is not supported
+            26: Size of Sync Manager 6 is not supported
+            27: Settings of Sync Manager 6 are not supported
+            28: Sync Manager 7 does not support an odd address
+            29: Address of Sync Manager 7 is not supported
+            30: Size of Sync Manager 7 is not supported
+            31: Settings of Sync Manager 7 are not supported
+        */
+        faultyCode--;
+        /* the faultyCode is stored in byte 3 of the Emergency */
+        pEmcy->Emcy.RegData[EMCY_OFFS_DIAGCODE] &= ~EMCY_MASK_DIAGCODE;
+        pEmcy->Emcy.RegData[EMCY_OFFS_DIAGCODE] |= ERROR_SYNCMANCH(faultyCode, channel) << EMCY_SHIFT_DIAGCODE;
+
+        /* the correct settings are stored in byte 4-7 of the Emergency */
+        switch (channel)
+        {
+        case PROCESS_DATA_OUT:
+            switch (faultyCode)
+            {
+            case SYNCMANCHADDRESS:
+                /* store the minimum output address in byte 4,5 */
+                pEmcy->Emcy.RegData[EMCY_OFFS_DIAGDATA] = SWAPWORD(MIN_PD_WRITE_ADDRESS);
+                /* store the maximum output address in byte 6,7 */
+                pEmcy->Emcy.RegData[EMCY_OFFS_DIAGDATA+1] = SWAPWORD(MAX_PD_WRITE_ADDRESS);
+                break;
+            case SYNCMANCHSIZE:
+                /* store the minimum output size in byte 4,5 */
+                pEmcy->Emcy.RegData[EMCY_OFFS_DIAGDATA] = SWAPWORD(nPdOutputSize);
+                /* store the maximum output size in byte 6,7 */
+                pEmcy->Emcy.RegData[EMCY_OFFS_DIAGDATA+1] = SWAPWORD(nPdOutputSize);
+                break;
+            case SYNCMANCHSETTINGS:
+                /* store the correct settings for the output sync manager in byte 4-7 */
+                if (nPdOutputSize)
+                {
+                    pEmcy->Emcy.RegData[EMCY_OFFS_DIAGDATA] = SWAPWORD(0xA); //Diagdata according to ETG.1000 (0x02 + channel *4)
+                    pEmcy->Emcy.RegData[EMCY_OFFS_DIAGDATA+1] = SWAPWORD(((UINT16) (SM_SETTING_ENABLE_VALUE >> SM_SETTING_ENABLE_SHIFT)));
+                }
+                else
+                {
+                    pEmcy->Emcy.RegData[EMCY_OFFS_DIAGDATA] = 0;
+                    pEmcy->Emcy.RegData[EMCY_OFFS_DIAGDATA+1] = 0;
+                }
+                break;
+            }
+            break;
+        case PROCESS_DATA_IN:
+            switch (faultyCode)
+            {
+            case SYNCMANCHADDRESS:
+                /* store the minimum input address in byte 4,5 */
+                pEmcy->Emcy.RegData[EMCY_OFFS_DIAGDATA]   = SWAPWORD(MIN_PD_READ_ADDRESS);
+                /* store the maximum input address in byte 6,7 */
+                pEmcy->Emcy.RegData[EMCY_OFFS_DIAGDATA+1] = SWAPWORD(MAX_PD_READ_ADDRESS);
+                break;
+            case SYNCMANCHSIZE:
+                /* store the minimum input size in byte 4,5 */
+                pEmcy->Emcy.RegData[EMCY_OFFS_DIAGDATA]   = SWAPWORD(nPdInputSize);
+                /* store the maximum input size in byte 6,7 */
+                pEmcy->Emcy.RegData[EMCY_OFFS_DIAGDATA+1] = SWAPWORD(nPdInputSize);
+                break;
+            case SYNCMANCHSETTINGS:
+                /* store the correct settings for the input sync manager in byte 4-7 */
+                if (nPdInputSize)
+                {
+
+                    pEmcy->Emcy.RegData[EMCY_OFFS_DIAGDATA]   = SWAPWORD(0xE); //Diagdata according to ETG.1000 (0x02 + channel *4)
+                    pEmcy->Emcy.RegData[EMCY_OFFS_DIAGDATA+1] = SWAPWORD(((UINT16) (SM_SETTING_ENABLE_VALUE >> SM_SETTING_ENABLE_SHIFT)));
+                }
+                else
+                {
+
+                    pEmcy->Emcy.RegData[EMCY_OFFS_DIAGDATA]   = 0;
+                    pEmcy->Emcy.RegData[EMCY_OFFS_DIAGDATA+1] = 0;
+                }
+                break;
+            }
+            break;
+        default:
+            pEmcy->Emcy.RegData[EMCY_OFFS_DIAGDATA]   = 0;
+            pEmcy->Emcy.RegData[EMCY_OFFS_DIAGDATA+1] = 0;
+        }
+
+        /* set the byte 0,1 of the Emergency to the state transition fault */
+        pEmcy->Emcy.Code = SWAPWORD(EMCY_SM_ERRORCODE);
+        /* set the byte 2 of the Emergency to the actual state */
+
+        pEmcy->Emcy.RegData[EMCY_OFFS_ERRORREGISTER] &= ~EMCY_MASK_ERRORREGISTER;
+        pEmcy->Emcy.RegData[EMCY_OFFS_ERRORREGISTER] |= nAlStatus << EMCY_SHIFT_ERRORREGISTER;
+
+        EMCY_SendEmergency(pEmcy);
+    }
+}
 
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -433,9 +562,8 @@ UINT8    CheckSmSettings(UINT8 maxChannel)
     /* check the Sync Manager Parameter for the Receive Mailbox (Sync Manager Channel 0) */
     pSyncMan = GetSyncMan(MAILBOX_WRITE);
 
-    SMLength = pSyncMan->Length;
-    SMAddress = pSyncMan->PhysicalStartAddress;
-
+    SMLength = (UINT16)((pSyncMan->AddressLength & SM_LENGTH_MASK) >> SM_LENGTH_SHIFT);
+    SMAddress = (UINT16)(pSyncMan->AddressLength & SM_ADDRESS_MASK);
 
 
     if (!(pSyncMan->Settings[SM_SETTING_ACTIVATE_OFFSET] & SM_SETTING_ENABLE_VALUE))
@@ -480,8 +608,8 @@ UINT8    CheckSmSettings(UINT8 maxChannel)
         /* check the Sync Manager Parameter for the Send Mailbox (Sync Manager Channel 1) */
         pSyncMan = GetSyncMan(MAILBOX_READ);
 
-    SMLength = pSyncMan->Length;
-    SMAddress = pSyncMan->PhysicalStartAddress;
+    SMLength = (UINT16)((pSyncMan->AddressLength & SM_LENGTH_MASK) >> SM_LENGTH_SHIFT);
+    SMAddress = (UINT16)(pSyncMan->AddressLength & SM_ADDRESS_MASK);
 
 
     if (!(pSyncMan->Settings[SM_SETTING_ACTIVATE_OFFSET] & SM_SETTING_ENABLE_VALUE))
@@ -528,9 +656,8 @@ UINT8    CheckSmSettings(UINT8 maxChannel)
         /* check the Sync Manager Parameter for the Inputs (Sync Manager Channel 2 (0 in case if no mailbox is supported)) */
         pSyncMan = GetSyncMan(PROCESS_DATA_IN);
 
-    SMLength = pSyncMan->Length;
-    SMAddress = pSyncMan->PhysicalStartAddress;
-
+    SMLength = (UINT16)((pSyncMan->AddressLength & SM_LENGTH_MASK) >> SM_LENGTH_SHIFT);
+    SMAddress = (UINT16)(pSyncMan->AddressLength & SM_ADDRESS_MASK);
 
 
     if ((pSyncMan->Settings[SM_SETTING_ACTIVATE_OFFSET] & SM_SETTING_ENABLE_VALUE) != 0 && SMLength == 0)
@@ -587,6 +714,8 @@ UINT8    CheckSmSettings(UINT8 maxChannel)
 
         if ( result != 0 )
         {
+            /* state transition refused, send an Emergency with the error and the correct settings */
+            SendSmFailedEmergency(PROCESS_DATA_IN, result);
             result = ALSTATUSCODE_INVALIDSMINCFG;
         }
     }
@@ -598,9 +727,8 @@ UINT8    CheckSmSettings(UINT8 maxChannel)
         /* check the Sync Manager Parameter for the Outputs (Sync Manager Channel 2) */
         pSyncMan = GetSyncMan(PROCESS_DATA_OUT);
 
-    SMLength = pSyncMan->Length;
-    SMAddress = pSyncMan->PhysicalStartAddress;
-
+        SMLength = (UINT16)((pSyncMan->AddressLength & SM_LENGTH_MASK) >> SM_LENGTH_SHIFT);
+        SMAddress = (UINT16)(pSyncMan->AddressLength & SM_ADDRESS_MASK);
 
 
     if ((pSyncMan->Settings[SM_SETTING_ACTIVATE_OFFSET] & SM_SETTING_ENABLE_VALUE) != 0 && SMLength == 0)
@@ -666,6 +794,8 @@ UINT8    CheckSmSettings(UINT8 maxChannel)
 
         if ( result != 0 )
         {
+            /* state transition refused, send an Emergency with the error and the correct settings */
+            SendSmFailedEmergency(PROCESS_DATA_OUT, result);
             result = ALSTATUSCODE_INVALIDSMOUTCFG;
         }
     }
@@ -677,7 +807,7 @@ UINT8    CheckSmSettings(UINT8 maxChannel)
         for (i = maxChannel; i < nMaxSyncMan; i++)
         {
             pSyncMan = GetSyncMan(i);
-            SMActivate = pSyncMan->Settings[SM_SETTING_ACTIVATE_OFFSET];
+            SMActivate = pSyncMan->Settings[0];
         }
     }
     return result;
@@ -699,7 +829,7 @@ UINT16 StartInputHandler(void)
 {
     TSYNCMAN ESCMEM * pSyncMan;
 
-    UINT16        dcControl;
+     UINT32        dcControl;
 
     UINT16     wdiv = 0;
     UINT16     wd = 0;
@@ -730,7 +860,7 @@ UINT16 StartInputHandler(void)
     /* get a pointer to the Sync Manager Channel 2 (Outputs) */
     pSyncMan = GetSyncMan(PROCESS_DATA_OUT);
     /* store the address of the Sync Manager Channel 2 (Outputs) */
-    nEscAddrOutputData = pSyncMan->PhysicalStartAddress;
+    nEscAddrOutputData = (UINT16) (pSyncMan->AddressLength & SM_ADDRESS_MASK);
     /* get the number of output buffer used for calculating the address areas */
     if (pSyncMan->Settings[SM_SETTING_CONTROL_OFFSET] & SM_SETTING_MODE_ONE_BUFFER_VALUE)
     {
@@ -741,7 +871,7 @@ UINT16 StartInputHandler(void)
     /* get a pointer to the Sync Manager Channel 3 (Inputs) */
     pSyncMan = GetSyncMan(PROCESS_DATA_IN);
     /* store the address of the Sync Manager Channel 3 (Inputs)*/
-    nEscAddrInputData = pSyncMan->PhysicalStartAddress;
+    nEscAddrInputData = (UINT16) (pSyncMan->AddressLength & SM_ADDRESS_MASK);
 
 
     /* get the number of input buffer used for calculating the address areas */
@@ -756,6 +886,8 @@ UINT16 StartInputHandler(void)
        || ((nEscAddrInputData + nPdInputSize * nPdInputBuffer) > u16EscAddrReceiveMbx && (nEscAddrInputData < (u16EscAddrReceiveMbx + u16ReceiveMbxSize)))
         )
     {
+        /* Sync Manager Channel 3 memory area (Inputs) overlaps the Sync Manager memory areas for the Mailbox */
+        SendSmFailedEmergency(PROCESS_DATA_IN, SYNCMANCHADDRESS+1);
         return ALSTATUSCODE_INVALIDSMINCFG;
     }
 
@@ -769,6 +901,7 @@ UINT16 StartInputHandler(void)
 
         /* Sync Manager Channel 2 memory area (Outputs) overlaps the Sync Manager memory areas for the Mailbox
            or the Sync Manager Channel 3 memory area (Inputs) */
+        SendSmFailedEmergency(PROCESS_DATA_OUT, SYNCMANCHADDRESS+1);
         return ALSTATUSCODE_INVALIDSMOUTCFG;
     }
 
@@ -777,9 +910,10 @@ UINT16 StartInputHandler(void)
     */
 
     /* Get the DC Control/Activation register value*/
-    /*Read registers 0x980:0x981 (corresponding masks are adapted)*/
-    HW_EscReadWord(dcControl, ESC_DC_UNIT_CONTROL_OFFSET);
-    dcControl = SWAPWORD(dcControl);
+     /*Read registers 0x980:0x983 (corresponding masks are adapted)*/
+    HW_EscReadDWord(dcControl, ESC_DC_UNIT_CONTROL_OFFSET);
+    dcControl = SWAPDWORD(dcControl);
+    dcControl &=ESC_DC_SYNC_ACTIVATION_MASK;
 
     // Cycle time for Sync0
         HW_EscReadDWord(cycleTimeSync0, ESC_DC_SYNC0_CYCLETIME_OFFSET);
@@ -1097,14 +1231,23 @@ UINT16 StartInputHandler(void)
     */
 
     /*get the watchdog time (register 0x420). if value is > 0 watchdog is active*/
-    HW_EscReadWord(wd, ESC_PD_WD_TIME);
-    wd = SWAPWORD(wd);
+    {
+    UINT32 tmpValue = 0;
+    HW_EscReadDWord(tmpValue, ESC_PD_WD_TIME);
+
+    wd = (UINT16)(SWAPDWORD(tmpValue) & 0x0000FFFF);
+    }
 
     if (nPdOutputSize > 0 &&  wd != 0 )
     {
     /*get watchdog divider (register 0x400)*/
-    HW_EscReadWord(wdiv, ESC_WD_DIVIDER_OFFSET);
-    wdiv = SWAPWORD(wdiv);
+    {
+    UINT32 tmpValue = 0;
+    HW_EscReadDWord(tmpValue, ESC_WD_DIVIDER_OFFSET);
+    tmpValue = SWAPDWORD(tmpValue);
+
+    wdiv = (UINT16)(tmpValue & 0x0000FFFF);
+    }
         if ( wdiv != 0 )
         {
             /* the ESC subtracts 2 in register 0x400 so it has to be added here */
@@ -1124,6 +1267,8 @@ UINT16 StartInputHandler(void)
             /* wd value has to be set to zero, if the wd is 0 */
             EcatWdValue = 0;
         }
+        /* reset watchdog counter */
+        EcatWdCounter = 0;
     }
     else
     {
@@ -1399,6 +1544,7 @@ void BackToInitTransition(void)
 void SetALStatus(UINT8 alStatus, UINT16 alStatusCode)
 {
     UINT16 Value = alStatusCode;
+    UINT32 tmpValue = 0;
 
     /*update global status variable if required*/
     if(nAlStatus != alStatus)
@@ -1409,14 +1555,15 @@ void SetALStatus(UINT8 alStatus, UINT16 alStatusCode)
 
     if (alStatusCode != 0xFFFF)
     {
-        Value = SWAPWORD(Value);
+        tmpValue = SWAPDWORD((UINT32) Value);
 
-        HW_EscWriteWord(Value,ESC_AL_STATUS_CODE_OFFSET);
+        HW_EscWriteDWord(tmpValue,ESC_AL_STATUS_CODE_OFFSET);
     }
 
-    Value = nAlStatus;
-    Value = SWAPWORD(Value);
-    HW_EscWriteWord(Value,ESC_AL_STATUS_OFFSET);
+    tmpValue = (UINT32) nAlStatus;
+    tmpValue = SWAPDWORD(tmpValue);
+
+    HW_EscWriteDWord(tmpValue,ESC_AL_STATUS_OFFSET);
 
     /*The Run LED state is set in Set LED Indication, only the Error LED blink code is set here*/
 
@@ -1549,14 +1696,76 @@ void AL_ControlInd(UINT8 alControl, UINT16 alStatusCode)
         switch ( stateTrans )
         {
         case INIT_2_BOOT    :
-            result = ALSTATUSCODE_BOOTNOTSUPP;
+            /* if the application has to execute code when going to BOOT this shall be done at this place */
+            bBootMode = TRUE;
+
+            if ( CheckSmSettings(MAILBOX_READ+1) != 0 )
+            {
+                bBootMode = FALSE;
+                result = ALSTATUSCODE_INVALIDMBXCFGINBOOT;
+                break;
+            }
+/*ECATCHANGE_START(V5.13) ECAT1*/
+/*ECATCHANGE_END(V5.13) ECAT1*/
+            /* disable all events in BOOT state */
+            ResetALEventMask(0);
+
+            /* MBX_StartMailboxHandler (in mailbox.c) checks if the areas of the mailbox
+               sync managers SM0 and SM1 overlap each other
+              if result is unequal 0, the slave will stay in INIT
+              and sets the ErrorInd Bit (bit 4) of the AL-Status */
+            result = MBX_StartMailboxHandler();
+            if (result == 0)
+            {
+                bApplEsmPending = FALSE;
+                /* additionally there could be an application specific check (in ecatappl.c)
+                    if the state transition from INIT to BOOT should be done
+                    if result is NOERROR_INWORK, the slave will stay in INIT until timeout 
+                    or transition is complete by AL_ControlRes*/
+            
+                result = APPL_StartMailboxHandler();
+                if ( result == 0 )
+                {
+                    /*transition successful*/
+                    bMbxRunning = TRUE;
+                }
+            }
+
+            if(result != 0 && result != NOERROR_INWORK)
+            {
+                /*Stop APPL Mbx handler if the APPL start handler was called before*/
+                    if (!bApplEsmPending)
+                    {
+                        APPL_StopMailboxHandler();
+                    }
+
+                 MBX_StopMailboxHandler();
+            }
+
+            BL_Start( STATE_BOOT );
+
+            if (result != 0)
+            {
+                bBootMode = FALSE;
+            }
 
 
 
             break;
 
         case BOOT_2_INIT    :
-            result = ALSTATUSCODE_BOOTNOTSUPP;
+            if(bBootMode)
+            {
+                bBootMode = FALSE;
+/*ECATCHANGE_START(V5.13) ECAT1*/
+/*ECATCHANGE_END(V5.13) ECAT1*/
+                /* disable all events in BOOT state */
+                ResetALEventMask(0);
+                MBX_StopMailboxHandler();
+                result = APPL_StopMailboxHandler();
+            }
+
+            BL_Stop();
 
             BackToInitTransition();
 
@@ -2202,6 +2411,45 @@ void AL_ControlRes(void)
     }// Pending state transition (bEcatWaitForAlControlRes == true)
 }
 
+/////////////////////////////////////////////////////////////////////////////////////////
+/**
+
+ \brief This function checks the watchdog and shall be called every 1ms
+ \brief If the watchdog expires in SAFEOP (bEcatInputUpdateRunning == true) only the flag indicating will be reset.
+ \brief If the watchdog expires in OP (bEcatOutputUpdateRunning == true) the reaction depends on the watchdog mode:
+ \brief  - If the slave requires process data in OP state the slave will switch to Error SAFEOP (Status 0x1B).
+ \brief  - If the slave doesn't require process data in OP state and no process data received yet just a local flag will be reset.
+
+*////////////////////////////////////////////////////////////////////////////////////////
+
+void ECAT_CheckWatchdog(void)
+{
+    if ( EcatWdValue != 0 )
+    {
+        // Watchdog is active
+        EcatWdCounter++;
+        if ( EcatWdCounter >= EcatWdValue )
+        {
+            // Watchdog is expired
+            EcatWdCounter = 0;
+            if (nPdOutputSize > 0)
+            {
+                //handle only the expired PD watchdog if outputs are configured
+                if (bEcatOutputUpdateRunning
+                    )
+                {
+                    /* watchdog expired in OP */
+                    AL_ControlInd(STATE_SAFEOP, ALSTATUSCODE_SMWATCHDOG);
+                }
+                else
+                {
+                    /* watchdog expired in SAFE-OP */
+                    bEcatFirstOutputsReceived = FALSE;
+                }
+            }
+        }
+    }
+}
 
 /////////////////////////////////////////////////////////////////////////////////////////
 /**
@@ -2212,7 +2460,6 @@ void AL_ControlRes(void)
 *////////////////////////////////////////////////////////////////////////////////////////
 void DC_CheckWatchdog(void)
 {
-    DISABLE_ESC_INT();
 
     if(bDcSyncActive && bEcatInputUpdateRunning)
     {
@@ -2278,7 +2525,6 @@ void DC_CheckWatchdog(void)
            bSmSyncSequenceValid = FALSE;
         }
     }
-    ENABLE_ESC_INT();
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -2289,33 +2535,6 @@ void DC_CheckWatchdog(void)
 *////////////////////////////////////////////////////////////////////////////////////////
 void CheckIfEcatError(void)
 {
-   /*if the watchdog is enabled check the process data watchdog in the ESC
-   and set the AL status code 0x1B if the watchdog expired*/
-   if (EcatWdValue != 0)
-   {
-      /*watchdog time is set => watchdog is active*/
-      UINT16 WdStatusOK = 0;
-
-      HW_EscReadWord(WdStatusOK, ESC_PD_WD_STATE);
-      WdStatusOK = SWAPWORD(WdStatusOK);
-
-      if (!(WdStatusOK & ESC_PD_WD_TRIGGER_MASK) && (nPdOutputSize > 0))
-      {
-         /*The device is in OP state*/
-
-         if (bEcatOutputUpdateRunning
-            )
-         {
-            AL_ControlInd(STATE_SAFEOP, ALSTATUSCODE_SMWATCHDOG);
-            return;
-         }
-
-         else
-         {
-            bEcatFirstOutputsReceived = FALSE;
-         }
-      }
-   }
 
    if(bDcSyncActive)
    {
@@ -2505,18 +2724,15 @@ void ECAT_Init(void)
     UINT8 i;
     /*Get Maximum Number of SyncManagers and supported DPRAM size*/
     {
-    UINT16 TmpVar = 0;
+    UINT32 TmpVar = 0;
 
-    HW_EscReadWord(TmpVar, ESC_COMM_INFO_OFFSET);
+    HW_EscReadDWord(TmpVar, ESC_COMM_INFO_OFFSET);
 
-    TmpVar = SWAPWORD(TmpVar);
-    nMaxSyncMan = (UINT8) ((TmpVar & ESC_SM_CHANNELS_MASK)>> ESC_SM_CHANNELS_SHIFT);
-
-    HW_EscReadWord(TmpVar, ESC_DPRAM_SIZE_OFFSET);
-    TmpVar = SWAPWORD(TmpVar);
+    TmpVar = SWAPDWORD(TmpVar);
+    nMaxSyncMan = (UINT8)((TmpVar & ESC_SM_CHANNELS_MASK) >> ESC_SM_CHANNELS_SHIFT);
 
     //get max address (register + DPRAM size in Byte (in the register it is stored in KB))
-    nMaxEscAddress = (UINT16) ((TmpVar & ESC_DPRAM_SIZE_MASK) << 10) + 0xFFF;
+    nMaxEscAddress = (UINT16)(((TmpVar & ESC_DPRAM_SIZE_MASK) >> ESC_DPRAM_SIZE_SHIFT) << 10) + 0xFFF;
     }
 
 
@@ -2533,6 +2749,7 @@ void ECAT_Init(void)
     MBX_Init();
 
     /* initialize variables */
+    bBootMode = FALSE;
     bApplEsmPending = FALSE;
     bEcatWaitForAlControlRes = FALSE;
     bEcatFirstOutputsReceived = FALSE;
@@ -2540,6 +2757,7 @@ void ECAT_Init(void)
      bEcatInputUpdateRunning = FALSE;
     bWdTrigger = FALSE;
     EcatWdValue = 0;
+    EcatWdCounter = 0;
     Sync0WdCounter = 0;
     Sync0WdValue = 0;
     Sync1WdCounter = 0;
@@ -2563,6 +2781,8 @@ void ECAT_Init(void)
 
     bEscIntEnabled = FALSE;
 
+    /* initialize the emergency handler */
+    EMCY_Init();
     /* initialize the COE part */
     COE_Init();
 
@@ -2582,8 +2802,8 @@ void ECAT_Main(void)
     UINT16 ALEventReg;
     UINT16 EscAlControl = 0x0000;
 /*ECATCHANGE_START(V5.13) MBX1*/
-    UINT16 sm1Activate = SM_SETTING_ENABLE_VALUE;
-    UINT16 sm1Status = 0; /*SM1 status need to be read (not MBX_READ_EVENT) to handle readframes with invalid CRCs*/
+     UINT32 sm1Activate = SM_SETTING_ENABLE_VALUE;
+     UINT32 sm1Status = 0; /*SM1 status need to be read (not MBX_READ_EVENT) to handle readframes with invalid CRCs*/
 /*ECATCHANGE_END(V5.13) MBX1*/
 
 
@@ -2596,12 +2816,10 @@ void ECAT_Main(void)
         /* Slave is at least in PREOP, Mailbox is running */
 
 /*ECATCHANGE_START(V5.13) MBX1*/
-        /* get the Activate-Byte of SM 1 (Register 0x80E) to check if a mailbox repeat request was received */
-        HW_EscReadWord(sm1Activate,(ESC_SYNCMAN_ACTIVE_OFFSET + SIZEOF_SM_REGISTER));
-        sm1Activate = SWAPWORD(sm1Activate);
-
-        HW_EscReadWord(sm1Status, (ESC_SYNCMAN_CONTROL_OFFSET + SIZEOF_SM_REGISTER));
-        sm1Status = SWAPWORD(sm1Status);
+        /*get registers 0x80C:0x80F and mask for SM active state (this is required to access an valid 32bit address)*/
+        HW_EscReadDWord(sm1Activate,(ESC_SYNCMAN_CONTROL_OFFSET + SIZEOF_SM_REGISTER));
+        sm1Activate = SWAPDWORD(sm1Activate);
+        sm1Status = sm1Activate;
 /*ECATCHANGE_END(V5.13) MBX1*/
     }
 
@@ -2614,9 +2832,10 @@ void ECAT_Main(void)
     {
         /* AL Control event is set, get the AL Control register sent by the Master to acknowledge the event
           (that the corresponding bit in the AL Event register will be reset) */
+        UINT32 tmpVal = 0;
 
-        HW_EscReadWord( EscAlControl, ESC_AL_CONTROL_OFFSET);
-        EscAlControl = SWAPWORD(EscAlControl);
+        HW_EscReadDWord( tmpVal, ESC_AL_CONTROL_OFFSET);
+        EscAlControl = (UINT16) SWAPDWORD(tmpVal);
 
 
 
@@ -2667,8 +2886,8 @@ void ECAT_Main(void)
             /* SM 1 (Mailbox Read) event is set, when the mailbox was read from the master,
                to acknowledge the event the first byte of the mailbox has to be written,
                by writing the first byte the mailbox is locked, too */
-            u16dummy = 0;
-            HW_EscWriteWord(u16dummy,u16EscAddrSendMbx);
+            u32dummy = 0;
+            HW_EscWriteDWord(u32dummy,u16EscAddrSendMbx);
 
             /* the Mailbox Read event in the variable ALEventReg shall be reset before calling
                MBX_MailboxReadInd, where a new mailbox datagram (if available) could be stored in the send mailbox */
@@ -2688,15 +2907,15 @@ void ECAT_Main(void)
                    in the Repeat Ack Bit (Bit 1) of the PDI Ctrl-Byte of SM 1 (Register 0x80F) */
                 if (bMbxRepeatToggle)
                 {
-                    sm1Activate |= SM_SETTING_REPEAT_ACK; //set repeat acknowledge bit (bit 9)
+                    sm1Activate |= SM_SETTING_REPEAT_ACK; //set repeat acknowledge bit (bit 25)
                 }
                 else
                 {
-                    sm1Activate &= ~SM_SETTING_REPEAT_ACK; //clear repeat acknowledge bit (bit 9)
+                    sm1Activate &= ~SM_SETTING_REPEAT_ACK; //clear repeat acknowledge bit (bit 25)
                 }
 
-                sm1Activate = SWAPWORD(sm1Activate);
-                HW_EscWriteWord(sm1Activate, (ESC_SYNCMAN_ACTIVE_OFFSET + SIZEOF_SM_REGISTER));
+                sm1Activate = SWAPDWORD(sm1Activate);
+                HW_EscWriteDWord(sm1Activate, (ESC_SYNCMAN_CONTROL_OFFSET + SIZEOF_SM_REGISTER));
             }
 
 

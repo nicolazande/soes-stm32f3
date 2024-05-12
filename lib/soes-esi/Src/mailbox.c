@@ -149,6 +149,8 @@ V4.07 ECAT 1: The sources for SPI and MCI were merged (in ecat_def.h<br>
 
 #include "ecatcoe.h"
 #include "sdoserv.h"
+#include "ecatfoe.h"
+#include "emcy.h"
 
 
 /*--------------------------------------------------------------------------------------
@@ -163,7 +165,7 @@ V4.07 ECAT 1: The sources for SPI and MCI were merged (in ecat_def.h<br>
 ------
 --------------------------------------------------------------------------------------*/
 /*variables are declared in ecatslv.c*/
-    extern VARVOLATILE UINT16    u16dummy;
+    extern VARVOLATILE UINT32    u32dummy;
 
     BOOL bNoMbxMemoryAvailable; /**< \brief Indicates if enough dynamic memory is available to handle at least one mailbox datagram */
 
@@ -276,11 +278,11 @@ void MBX_Init(void)
 
     bMbxRepeatToggle    = FALSE;
     /*Reset Repeat acknowledge bit of SyncManager1 (0x80F bit 2)*/
-    {
-        UINT16 sm1Activate = 0;
-        HW_EscReadWord(sm1Activate,(ESC_SYNCMAN_ACTIVE_OFFSET + SIZEOF_SM_REGISTER));
-        sm1Activate &= SWAPWORD(~0x0200);
-        HW_EscWriteWord(sm1Activate,(ESC_SYNCMAN_ACTIVE_OFFSET + SIZEOF_SM_REGISTER));
+     {
+        UINT32 sm1Activate = 0;
+        HW_EscReadDWord(sm1Activate,(ESC_SYNCMAN_CONTROL_OFFSET + SIZEOF_SM_REGISTER));
+        sm1Activate &= SWAPDWORD(~0x02000000);
+        HW_EscWriteDWord(sm1Activate,(ESC_SYNCMAN_CONTROL_OFFSET + SIZEOF_SM_REGISTER));
     }
     bMbxRunning = FALSE;
     bSendMbxIsFull = FALSE;
@@ -308,17 +310,17 @@ UINT16 MBX_StartMailboxHandler(void)
     TSYNCMAN ESCMEM * pSyncMan = (TSYNCMAN ESCMEM *)GetSyncMan(MAILBOX_WRITE);
 
     /* store size of the receive mailbox */
-    u16ReceiveMbxSize     = pSyncMan->Length;
+    u16ReceiveMbxSize     = (UINT16) ((pSyncMan->AddressLength & SM_LENGTH_MASK) >>SM_LENGTH_SHIFT);
     /* store the address of the receive mailbox */
-    u16EscAddrReceiveMbx = pSyncMan->PhysicalStartAddress;
+    u16EscAddrReceiveMbx = (UINT16) (pSyncMan->AddressLength & SM_ADDRESS_MASK);
 
     /* get address of the send mailbox sync manager (SM1) */
     pSyncMan =(TSYNCMAN ESCMEM *) GetSyncMan(MAILBOX_READ);
 
     /* store the size of the send mailbox */
-    u16SendMbxSize = pSyncMan->Length;
+    u16SendMbxSize = (UINT16) ((pSyncMan->AddressLength & SM_LENGTH_MASK) >>SM_LENGTH_SHIFT);
     /* store the address of the send mailbox */
-    u16EscAddrSendMbx = pSyncMan->PhysicalStartAddress;
+    u16EscAddrSendMbx = (UINT16) (pSyncMan->AddressLength & SM_ADDRESS_MASK);
 
     // HBu 02.05.06: it should be checked if there are overlaps in the sync manager areas
     if ((u16EscAddrReceiveMbx + u16ReceiveMbxSize) > u16EscAddrSendMbx && (u16EscAddrReceiveMbx < (u16EscAddrSendMbx + u16SendMbxSize)))
@@ -326,6 +328,7 @@ UINT16 MBX_StartMailboxHandler(void)
         return ALSTATUSCODE_INVALIDMBXCFGINPREOP;
     }
 
+    u16FoeMaxSendBlockSize = (u16SendMbxSize - SIZEOF(TFOEHEADER) - MBX_HEADER_SIZE);
 
     /* enable the receive mailbox sync manager channel */
     EnableSyncManChannel(MAILBOX_WRITE);
@@ -398,6 +401,7 @@ void MBX_StopMailboxHandler(void)
     SDOS_ClearPendingResponse();
 
 
+    FOE_Init();
 
     psWriteMbx = NULL;
     psRepeatMbx = NULL;
@@ -406,11 +410,11 @@ void MBX_StopMailboxHandler(void)
 
     bMbxRepeatToggle    = FALSE;
     /*Reset Repeat acknowledge bit of SyncManager1 (0x080F bit 2)*/
-    {
-        UINT16 sm1Activate = 0;
-        HW_EscReadWord(sm1Activate,(ESC_SYNCMAN_ACTIVE_OFFSET + SIZEOF_SM_REGISTER));
-        sm1Activate &= SWAPWORD(~0x0200);
-        HW_EscWriteWord(sm1Activate,(ESC_SYNCMAN_ACTIVE_OFFSET + SIZEOF_SM_REGISTER));
+     {
+        UINT32 sm1Activate = 0;
+        HW_EscReadDWord(sm1Activate,(ESC_SYNCMAN_CONTROL_OFFSET + SIZEOF_SM_REGISTER));
+        sm1Activate &= SWAPDWORD(~0x02000000);
+        HW_EscWriteDWord(sm1Activate,(ESC_SYNCMAN_CONTROL_OFFSET + SIZEOF_SM_REGISTER));
     }
     bSendMbxIsFull         = FALSE;
     bReceiveMbxIsLocked = FALSE;
@@ -436,6 +440,7 @@ void MBX_StopMailboxHandler(void)
         }
     } while (pMbx != NULL);
 
+    EMCY_Init();
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -450,12 +455,22 @@ UINT8 MailboxServiceInd(TMBX MBXMEM *pMbx)
 {
     UINT8 result;
 
+    /*only FoE is allowed in Boot mode*/
+    if(bBootMode == TRUE && (MBX_TYPE_FOE != ((pMbx->MbxHeader.Flags[MBX_OFFS_TYPE] & MBX_MASK_TYPE) >> MBX_SHIFT_TYPE )))
+    {
+        return MBXERR_UNSUPPORTEDPROTOCOL;
+    }
 
     switch ( (pMbx->MbxHeader.Flags[MBX_OFFS_TYPE] & MBX_MASK_TYPE) >> MBX_SHIFT_TYPE )
     {
     case MBX_TYPE_COE:
         /* CoE datagram received */
         result = COE_ServiceInd((TCOEMBX MBXMEM *) pMbx);
+        break;
+
+    case MBX_TYPE_FOE:
+        /* FoE datagram received */
+        result = FOE_ServiceInd((TFOEMBX MBXMEM *) pMbx);
         break;
 
     default:
@@ -578,6 +593,16 @@ void MBX_MailboxReadInd(void)
       if ( u8MailboxSendReqStored )
     {
         /* there are mailbox services stored to be sent */
+        if ( u8MailboxSendReqStored & EMCY_SERVICE )
+        {
+            /* call EMCY function that will send the stored Emergency service */
+            EMCY_ContinueInd(psWriteMbx);
+            if (EMCY_IsQueueEmpty())
+            {
+                u8MailboxSendReqStored &= ~EMCY_SERVICE;
+            }
+        }
+        else
         if ( u8MailboxSendReqStored & COE_SERVICE )
         {
            UINT8 result = 0;
@@ -592,6 +617,14 @@ void MBX_MailboxReadInd(void)
                 /*Set the pending CoE indication is an error occurred during the continue indication*/
                 u8MailboxSendReqStored |= COE_SERVICE;
             }
+        }
+        else
+        if ( u8MailboxSendReqStored & FOE_SERVICE )
+        {
+            /* reset the flag indicating that FoE service to be sent was stored */
+            u8MailboxSendReqStored &= ~FOE_SERVICE;
+            /* call FoE function that will send the stored FoE service */
+            FOE_ContinueInd(psWriteMbx);
         }
         else
 /*ECATCHANGE_START(V5.13) EOE1*/
@@ -743,11 +776,13 @@ void MBX_CheckAndCopyMailbox( void )
 {
     UINT16 mbxLen;
 
+    UINT32 tmpValue= 0;
     /* get the size of the received mailbox command and acknowledge the event*/
-    HW_EscReadWord(mbxLen,u16EscAddrReceiveMbx);
-    
+    HW_EscReadDWord(tmpValue,u16EscAddrReceiveMbx);
+
     /* the size has to be swapped here, all other bytes of the mailbox service will be swapped later */
-    mbxLen = SWAPWORD(mbxLen);
+    tmpValue = (SWAPDWORD(tmpValue) & 0x0000FFFF);
+    mbxLen = (UINT16) tmpValue;
 
     if(bNoMbxMemoryAvailable == TRUE)
     {
@@ -817,15 +852,15 @@ void MBX_CheckAndCopyMailbox( void )
 
         {
         /*Read Control and Status of SyncManager 0 to check if the buffer is unlocked*/
-        VARVOLATILE UINT16 smstate = 0x00;
-        HW_EscReadWord(smstate,ESC_SYNCMAN_CONTROL_OFFSET);
-        smstate = SWAPWORD(smstate);
+        VARVOLATILE UINT32 smstate = 0x00;
+        HW_EscReadDWord(smstate,ESC_SYNCMAN_CONTROL_OFFSET);
+        smstate = SWAPDWORD(smstate);
 
         if(smstate & SM_STATUS_MBX_BUFFER_FULL)
         {
             /*Unlock the mailbox SyncManger buffer*/
-            u16dummy = 0;
-            HW_EscReadWord(u16dummy,(u16EscAddrReceiveMbx + u16ReceiveMbxSize - 2));
+            u32dummy = 0;
+            HW_EscReadDWord(u32dummy,(u16EscAddrReceiveMbx + u16ReceiveMbxSize - 4));
 
         }
 
@@ -874,17 +909,18 @@ UINT8 MBX_CopyToSendMailbox( TMBX MBXMEM *pMbx )
         {
             UINT16 LastUsedAddr = u16EscAddrSendMbx + mbxSize + MBX_HEADER_SIZE;
             UINT16 LastAddrToReset = (u16EscAddrSendMbx + u16SendMbxSize);
-            /*round down to last even 16bit address*/
-            LastUsedAddr = LastUsedAddr & 0xFFFE;
-            LastAddrToReset = (LastAddrToReset - 2) & 0xFFFE;
-            u16dummy = 0;
+            /*round down to last even 32bit address*/
+            LastUsedAddr = LastUsedAddr & 0xFFFC;
+            LastAddrToReset = (LastAddrToReset - 4) & 0xFFFC;
+            u32dummy = 0;
 
             /*clear all unused bytes*/
             while (LastUsedAddr < LastAddrToReset) /*reset all bytes until the second last valid address*/
             {
-                HW_EscWriteWord(u16dummy, LastUsedAddr);
-                LastUsedAddr = LastUsedAddr + 2;
+                HW_EscWriteDWord(u32dummy, LastUsedAddr);
+                LastUsedAddr = LastUsedAddr + 4;
             }
+
         }
 /*ECATCHANGE_END(V5.13) MBX2*/
 
@@ -893,9 +929,9 @@ UINT8 MBX_CopyToSendMailbox( TMBX MBXMEM *pMbx )
 
         {
         /*Read Control and Status of SyncManager 1 to check if the buffer is still marked as empty*/
-        VARVOLATILE UINT16 smstate = 0x00;
-        HW_EscReadWord(smstate,(ESC_SYNCMAN_CONTROL_OFFSET + SIZEOF_SM_REGISTER));
-        smstate = SWAPWORD(smstate);
+        VARVOLATILE UINT32 smstate = 0x00;
+        HW_EscReadDWord(smstate,(ESC_SYNCMAN_CONTROL_OFFSET + SIZEOF_SM_REGISTER));
+        smstate = SWAPDWORD(smstate);
 
         if(!(smstate & SM_STATUS_MBX_BUFFER_FULL))
         {
@@ -903,20 +939,21 @@ UINT8 MBX_CopyToSendMailbox( TMBX MBXMEM *pMbx )
             UINT16 BytesLeft = u16SendMbxSize - (mbxSize + MBX_HEADER_SIZE);
 
             /*Write last Byte to trigger mailbox full flag*/
-            /*Read last 2 Bytes and write them again (required if low Byte of the WORD were written before)*/
-            u16dummy = 0;
-            if(BytesLeft < 2)
+            /*Read last 4 Bytes and write them again (required if low 3 Bytes of the DWORD were written before)*/
+            u32dummy = 0;
+            if(BytesLeft < 4)
             {
-                /*The last 2Bytes are overlapping the already written buffer*/
+                /*The last 4Bytes are overlapping the already written buffer*/
 
-                /*Get the valid 16Bit address*/
-                UINT32 LastDataAddress = ((mbxSize + MBX_HEADER_SIZE)/2);
-            
+                /*Get the valid 32Bit address*/
+                UINT32 LastDataAddress = ((mbxSize + MBX_HEADER_SIZE)/4);
+
+
                 /*Copy the buffer to overwrite*/
-                MEMCPY((UINT16 *)&u16dummy,(((UINT16 *)pMbx) + LastDataAddress),(2 - BytesLeft));
+                MEMCPY((UINT32 *)&u32dummy,(((UINT32 *)pMbx) + LastDataAddress),(4 - BytesLeft));
             }
 
-            HW_EscWriteWord(u16dummy, (u16EscAddrSendMbx + u16SendMbxSize - 2));
+            HW_EscWriteDWord(u32dummy, (u16EscAddrSendMbx + u16SendMbxSize - 4));
         }
         }
 
@@ -973,6 +1010,12 @@ void MBX_Main(void)
     }
     while ( pMbx != NULL );
 
+    //dump queued emcy message if send mailbox buffer is empty
+    if(bMbxRunning && !bSendMbxIsFull && !EMCY_IsQueueEmpty())
+    {
+        TEMCYMESSAGE EMCYMEM *pEmcy = GetOutOfSendEmcyQueue();
+        EMCY_SendEmergency(pEmcy);
+    }
 
     if (bReceiveMbxIsLocked)
     {

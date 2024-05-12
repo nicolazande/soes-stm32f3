@@ -48,6 +48,7 @@ V5.10.1 : Start file change log
 
 
 
+#include "foeappl.h"
 
 #endif /*#ifndef _APPL_INTERFACE_H_*/
 
@@ -67,6 +68,124 @@ V5.10.1 : Start file change log
 
 
 
+
+/////////////////////////////////////////////////////////////////////////////////////////
+/**
+\param     pName         Pointer to the name of the file (the pointer is null if the function is called due to a previous busy state)
+\param     nameSize      Length of the file name (the value is 0 if the function is called due to a previous busy state)
+\param     password      Password for the file read (the value is 0 if the function is called due to a previous busy state)
+\param     maxBlockSize  Maximum size of a data block (copied to pData)
+\param     pData         Destination pointer for the first FoE fragment
+                        
+
+
+\return                  block size:
+                            < FOE_MAXBUSY-101    (0x7F95)
+                         busy:
+                            FOE_MAXBUSY-100 (0%)    (0x7FFA - 0x64)
+                            ...
+                            FOE_MAXBUSY (100%) (0x7FFA)
+                         error:
+                            ECAT_FOE_ERRCODE_NOTDEFINED (0x8000)
+                            ECAT_FOE_ERRCODE_NOTFOUND (0x8001)
+                            ECAT_FOE_ERRCODE_ACCESS    (0x8002)
+                            ECAT_FOE_ERRCODE_DISKFULL (0x8003)
+                            ECAT_FOE_ERRCODE_ILLEGAL (0x8004)
+                            ECAT_FOE_ERRCODE_EXISTS    (0x8006)
+                            ECAT_FOE_ERRCODE_NOUSER    (0x8007)
+
+\brief    The function is called when a file read request was received. The Foe fragments shall always have the length of "maxBlockSize" till the last file fragment.
+\brief    In case that the file size is a multiple of "maxBlockSize" 0 shall be returned after the last fragment.
+\brief	   The function pointer is reset in MainInit() so it shall be set afterwards
+*////////////////////////////////////////////////////////////////////////////////////////
+PROTO UINT16 (*pAPPL_FoeRead)(UINT16 MBXMEM * pName, UINT16 nameSize, UINT32 password, UINT16 maxBlockSize, UINT16 *pData);
+
+
+/////////////////////////////////////////////////////////////////////////////////////////
+/**
+\param     offset        File offset which shall be transmitted next
+\param     maxBlockSize  Maximum size of a data block (copied to pData)
+\param     pData         Destination pointer for the next foe fragment
+
+
+
+\return                  block size:
+                            < FOE_MAXBUSY-101    (0x7F95)
+                        busy:
+                            FOE_MAXBUSY-100 (0%)    (0x7FFA - 0x64)
+                            ...
+                            FOE_MAXBUSY (100%) (0x7FFA)
+                        error:
+                            ECAT_FOE_ERRCODE_NOTDEFINED (0x8000)
+                            ECAT_FOE_ERRCODE_NOTFOUND (0x8001)
+                            ECAT_FOE_ERRCODE_ACCESS    (0x8002)
+                            ECAT_FOE_ERRCODE_DISKFULL (0x8003)
+                            ECAT_FOE_ERRCODE_ILLEGAL (0x8004)
+                            ECAT_FOE_ERRCODE_EXISTS    (0x8006)
+                            ECAT_FOE_ERRCODE_NOUSER    (0x8007)
+
+\brief    The function is called to transmit FoE read data 2 .. n (the slave received an acknowledge on a previous accepted file read request). The Foe fragments shall always have the length of "maxBlockSize" till the last file fragment.
+\brief    In case that the file size is a multiple of "maxBlockSize" 0 shall be returned after the last fragment.
+\brief	   The function pointer is reset in MainInit() so it shall be set afterwards
+*////////////////////////////////////////////////////////////////////////////////////////
+PROTO UINT16(*pAPPL_FoeReadData)(UINT32 offset, UINT16 maxBlockSize, UINT16 *pData);
+
+
+/////////////////////////////////////////////////////////////////////////////////////////
+/**
+\param     errorCode     Error code send by the EtherCAT master
+
+
+\brief    The function is called when the master has send an FoE Abort.
+\brief	   The function pointer is reset in MainInit() so it shall be set afterwards
+*////////////////////////////////////////////////////////////////////////////////////////
+PROTO void(*pAPPL_FoeError)(UINT32 errorCode);
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////
+/**
+\param     pName         Pointer to the name of the file
+\param     nameSize      Length of the file name
+\param     password      Password for the file read
+
+\return                 okay, or an error code
+                        0 (okay)
+                        ECAT_FOE_ERRCODE_NOTDEFINED (0x8000)
+                        ECAT_FOE_ERRCODE_NOTFOUND (0x8001)
+                        ECAT_FOE_ERRCODE_ACCESS    (0x8002)
+                        ECAT_FOE_ERRCODE_DISKFULL (0x8003)
+                        ECAT_FOE_ERRCODE_ILLEGAL (0x8004)
+                        ECAT_FOE_ERRCODE_EXISTS    (0x8006)
+                        ECAT_FOE_ERRCODE_NOUSER    (0x8007)
+
+\brief    This function is called on a received FoE write request.
+\brief    (no busy response shall be returned by this function. If the slave requires some time to handle the incoming data the function pAPPL_FoeData() shall return a busy)
+\brief	   The function pointer is reset in MainInit() so it shall be set afterwards
+*////////////////////////////////////////////////////////////////////////////////////////
+PROTO UINT16 (*pAPPL_FoeWrite)(UINT16 MBXMEM * pName, UINT16 nameSize, UINT32 password);
+
+
+/////////////////////////////////////////////////////////////////////////////////////////
+/**
+\param     pData            Received file data
+\param 	   Size             Length of received file data
+\param 	   bDataFollowing   TRUE if more FoE Data requests are following
+
+\return                     okay, busy or an error code
+                            0 (okay)
+                            FOE_MAXBUSY-100 (0%)    (0x7FFa - 100)
+                            FOE_MAXBUSY (100%) (0x7FFA)
+                            ECAT_FOE_ERRCODE_NOTDEFINED (0x8000)
+                            ECAT_FOE_ERRCODE_ACCESS    (0x8002)
+                            ECAT_FOE_ERRCODE_DISKFULL (0x8003)
+                            ECAT_FOE_ERRCODE_ILLEGAL (0x8004)
+                            ECAT_FOE_ERRCODE_NOUSER    (0x8007)
+
+\brief    This function is called on a FoE Data request
+\brief	   The function pointer is reset in MainInit() so it shall be set afterwards
+*////////////////////////////////////////////////////////////////////////////////////////
+PROTO UINT16(*pAPPL_FoeWriteData)(UINT16 MBXMEM * pData, UINT16 Size, BOOL bDataFollowing);
 
 /* ECATCHANGE_START(V5.13) COE4*/
 /////////////////////////////////////////////////////////////////////////////////////////

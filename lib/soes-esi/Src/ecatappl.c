@@ -197,7 +197,7 @@ UINT16             aPdOutputData[(MAX_PD_OUTPUT_SIZE>>1)];
 UINT16           aPdInputData[(MAX_PD_INPUT_SIZE>>1)];
 
 /*variables are declared in ecatslv.c*/
-    extern VARVOLATILE UINT16    u16dummy;
+    extern VARVOLATILE UINT32    u32dummy;
 
 BOOL bInitFinished = FALSE; /** < \brief indicates if the initialization is finished*/
 
@@ -347,6 +347,8 @@ void ECAT_CheckTimer(void)
         EsmTimeoutCounter--;
     }
 
+    /*The SyncManager watchdog is not supported, the local watchdog is used*/
+    ECAT_CheckWatchdog();
 
     ECAT_SetLedIndication();
 
@@ -496,6 +498,8 @@ void PDI_Isr(void)
         /* Outputs were updated, set flag for watchdog monitoring */
         bEcatFirstOutputsReceived = TRUE;
 
+        /* reset watchdog counter */
+        EcatWdCounter = 0;
 
         /*
             handle output process data event
@@ -508,8 +512,8 @@ void PDI_Isr(void)
         else
         {
             /* Just acknowledge the process data event in the INIT,PreOP and SafeOP state */
-            HW_EscReadWordIsr(u16dummy,nEscAddrOutputData);
-            HW_EscReadWordIsr(u16dummy,(nEscAddrOutputData+nPdOutputSize-2));
+            HW_EscReadDWordIsr(u32dummy,nEscAddrOutputData);
+            HW_EscReadDWordIsr(u32dummy,(nEscAddrOutputData+nPdOutputSize-4));
         }
         }
 
@@ -545,8 +549,8 @@ void PDI_Isr(void)
         sSyncManInPar.u16CycleExceededCounter = sSyncManOutPar.u16CycleExceededCounter;
 
       /* Acknowledge the process data event*/
-            HW_EscReadWordIsr(u16dummy,nEscAddrOutputData);
-            HW_EscReadWordIsr(u16dummy,(nEscAddrOutputData+nPdOutputSize-2));
+            HW_EscReadDWordIsr(u32dummy,nEscAddrOutputData);
+            HW_EscReadDWordIsr(u32dummy,(nEscAddrOutputData+nPdOutputSize-4));
     }
     } //if(bEscIntEnabled)
 
@@ -893,6 +897,11 @@ UINT16 MainInit(void)
 
 
 
+    pAPPL_FoeRead = NULL;
+    pAPPL_FoeReadData = NULL;
+    pAPPL_FoeError = NULL;
+    pAPPL_FoeWrite = NULL;
+    pAPPL_FoeWriteData = NULL;
 
     /* ECATCHANGE_START(V5.13) COE4*/
     pAPPL_CoeReadInd = NULL;
@@ -1004,6 +1013,8 @@ void MainLoop(void)
                 {
                     /* set the flag for the state machine behavior */
                     bEcatFirstOutputsReceived = TRUE;
+                    /* reset watchdog counter */
+                    EcatWdCounter = 0;
                     if ( bEcatOutputUpdateRunning )
                     {
                         /* update the outputs */
@@ -1017,6 +1028,8 @@ void MainLoop(void)
                     {
                         /* Outputs were updated, set flag for watchdog monitoring */
                         bEcatFirstOutputsReceived = TRUE;
+                        /* reset watchdog counter */
+                        EcatWdCounter = 0;
                     }
                 }
             }
@@ -1034,17 +1047,6 @@ void MainLoop(void)
             ENABLE_ESC_INT();
         }
 
-        /* there is no interrupt routine for the hardware timer so check the timer register if the desired cycle elapsed*/
-        {
-            UINT32 CurTimer = (UINT32)HW_GetTimer();
-
-            if(CurTimer>= ECAT_TIMER_INC_P_MS)
-            {
-                ECAT_CheckTimer();
-
-                HW_ClearTimer();
-            }
-        }
 
         if (u32CheckForDcOverrunCnt >= CHECK_DC_OVERRUN_IN_MS)
         {

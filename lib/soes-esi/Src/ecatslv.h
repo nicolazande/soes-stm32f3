@@ -45,7 +45,8 @@ V5.01 : Start file change log
 
 #include "ecat_def.h"
 
-#include "el9800hw.h"
+#include  "esc.h"
+#include "drv_lan9252.h"
 
 #ifndef _ECATSLV_H_
 #define _ECATSLV_H_
@@ -374,6 +375,7 @@ V5.01 : Start file change log
 ------    Global Variables
 ------
 -----------------------------------------------------------------------------------------*/
+PROTO    BOOL                           bBootMode; /**< \brief Indicates in slave is in BOOT mode*/
 PROTO    BOOL                           bEcatOutputUpdateRunning;  /**< \brief Indicates the OP state, will be set in StartOutputHandler
                                                                                 and reset in StopOutputHandler*/
 
@@ -449,6 +451,9 @@ PROTO UINT8                             nAlStatus; /**< \brief Contains the actu
 
 PROTO UINT16                            EcatWdValue; /**< \brief Contains the value of the watchdog in ms, will be written in StartInputHandler. 
                                                                     In case that the ESC watchdog feature is used this variable just indicates if the watchdog is enabled or disabled*/
+PROTO UINT16                            EcatWdCounter; /**< \brief Counter for the watchdog, will be reset in StartInputHandler and from
+                                                                    the application when outputs were received (SM2-event) or inputs were read
+                                                                    (SM3-event, if the output size is 0)*/
 PROTO    UINT16                         nEscAddrOutputData; /**< \brief Contains the SM address for the output process data*/
 PROTO    UINT16                         nEscAddrInputData; /**< \brief Contains the SM address for the input process data*/
 
@@ -463,6 +468,7 @@ PROTO void DisableSyncManChannel(UINT8 channel);
 PROTO TSYNCMAN ESCMEM *GetSyncMan(UINT8 channel);
 PROTO void SetALStatus(UINT8 alStatus, UINT16 alStatusCode);
 PROTO void AL_ControlInd(UINT8 alControl, UINT16 alStatusCode);
+PROTO void ECAT_CheckWatchdog(void);
 PROTO void DC_CheckWatchdog(void);
 PROTO    void CheckIfEcatError(void);
 PROTO void ECAT_Init(void);

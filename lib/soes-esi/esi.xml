@@ -3374,49 +3374,49 @@
                   <SubItem>
                     <Name>LED state [0]</Name>
                     <Info>
-                      <DefaultData>70000108</DefaultData>
+					  <DefaultData>08010070</DefaultData>
                     </Info>
                   </SubItem>
                   <SubItem>
                     <Name>LED state [1]</Name>
                     <Info>
-                      <DefaultData>70000208</DefaultData>
+					  <DefaultData>08020070</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>LED state [2]</Name>
                     <Info>
-                      <DefaultData>70000308</DefaultData>
+					  <DefaultData>08030070</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>LED state [3]</Name>
                     <Info>
-                      <DefaultData>70000408</DefaultData>
+					  <DefaultData>08040070</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>LED state [4]</Name>
                     <Info>
-                      <DefaultData>70000508</DefaultData>
+					  <DefaultData>08050070</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>LED state [5]</Name>
                     <Info>
-                      <DefaultData>70000608</DefaultData>
+					  <DefaultData>08060070</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>LED state [6]</Name>
                     <Info>
-                      <DefaultData>70000708</DefaultData>
+					  <DefaultData>08070070</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>LED state [7]</Name>
                     <Info>
-                      <DefaultData>70000808</DefaultData>
+					  <DefaultData>08080070</DefaultData>
                     </Info>
                   </SubItem>
                 </Info>
@@ -3439,49 +3439,49 @@
                   <SubItem>
                     <Name>24V power supply state [0]</Name>
                     <Info>
-                      <DefaultData>70010108</DefaultData>
+					  <DefaultData>08010170</DefaultData>
                     </Info>
                   </SubItem>
                   <SubItem>
                     <Name>24V power supply state [1]</Name>
                     <Info>
-                      <DefaultData>70010208</DefaultData>
+					  <DefaultData>08020170</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>24V power supply state [2]</Name>
                     <Info>
-                      <DefaultData>70010308</DefaultData>
+					  <DefaultData>08030170</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>24V power supply state [3]</Name>
                     <Info>
-                      <DefaultData>70010408</DefaultData>
+					  <DefaultData>08040170</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>24V power supply state [4]</Name>
                     <Info>
-                      <DefaultData>70010508</DefaultData>
+					  <DefaultData>08050170</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>24V power supply state [5]</Name>
                     <Info>
-                      <DefaultData>70010608</DefaultData>
+					  <DefaultData>08060170</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>24V power supply state [6]</Name>
                     <Info>
-                      <DefaultData>70010708</DefaultData>
+					  <DefaultData>08070170</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>24V power supply state [7]</Name>
                     <Info>
-                      <DefaultData>70010808</DefaultData>
+					  <DefaultData>08080170</DefaultData>
                     </Info>
                   </SubItem>
                 </Info>
@@ -3504,49 +3504,49 @@
                   <SubItem>
                     <Name>20V power supply state [0]</Name>
                     <Info>
-                      <DefaultData>70020108</DefaultData>
+					  <DefaultData>08010270</DefaultData>
                     </Info>
                   </SubItem>
                   <SubItem>
                     <Name>20V power supply state [1]</Name>
                     <Info>
-                      <DefaultData>70020208</DefaultData>
+					  <DefaultData>08020270</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>20V power supply state [2]</Name>
                     <Info>
-                      <DefaultData>70020308</DefaultData>
+					  <DefaultData>08030270</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>20V power supply state [3]</Name>
                     <Info>
-                      <DefaultData>70020408</DefaultData>
+					  <DefaultData>08040270</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>20V power supply state [4]</Name>
                     <Info>
-                      <DefaultData>70020508</DefaultData>
+					  <DefaultData>08050270</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>20V power supply state [5]</Name>
                     <Info>
-                      <DefaultData>70020608</DefaultData>
+					  <DefaultData>08060270</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>20V power supply state [6]</Name>
                     <Info>
-                      <DefaultData>70020708</DefaultData>
+					  <DefaultData>08070270</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>20V power supply state [7]</Name>
                     <Info>
-                      <DefaultData>70020808</DefaultData>
+					  <DefaultData>08080270</DefaultData>
                     </Info>
                   </SubItem>
                 </Info>
@@ -3569,13 +3569,13 @@
                   <SubItem>
                     <Name>5V power supply state [0]</Name>
                     <Info>
-                      <DefaultData>70030108</DefaultData>
+					  <DefaultData>08010370</DefaultData>
                     </Info>
                   </SubItem>
                   <SubItem>
                     <Name>24V power supply state [1]</Name>
                     <Info>
-                      <DefaultData>70030208</DefaultData>
+					  <DefaultData>08020370</DefaultData>
                     </Info>
                   </SubItem>
                 </Info>
@@ -3598,601 +3598,601 @@
                   <SubItem>
                     <Name>RTR temperature [0]</Name>
                     <Info>
-                      <DefaultData>60000120</DefaultData>
+                      <DefaultData>20010060</DefaultData>
                     </Info>
                   </SubItem>
                   <SubItem>
                     <Name>RTR temperature [1]</Name>
                     <Info>
-                      <DefaultData>60000220</DefaultData>
+                      <DefaultData>20020060</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR temperature [2]</Name>
                     <Info>
-                      <DefaultData>60000320</DefaultData>
+                      <DefaultData>20030060</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR temperature [3]</Name>
                     <Info>
-                      <DefaultData>60000420</DefaultData>
+                      <DefaultData>20040060</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR temperature [4]</Name>
                     <Info>
-                      <DefaultData>60000520</DefaultData>
+                      <DefaultData>20050060</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR temperature [5]</Name>
                     <Info>
-                      <DefaultData>60000620</DefaultData>
+                      <DefaultData>20060060</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR temperature [6]</Name>
                     <Info>
-                      <DefaultData>60000720</DefaultData>
+                      <DefaultData>20070060</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR temperature [7]</Name>
                     <Info>
-                      <DefaultData>60000820</DefaultData>
+                      <DefaultData>20080060</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR temperature [8]</Name>
                     <Info>
-                      <DefaultData>60000920</DefaultData>
+                      <DefaultData>20090060</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR temperature [9]</Name>
                     <Info>
-                      <DefaultData>60000A20</DefaultData>
+                      <DefaultData>200A0060</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR temperature [10]</Name>
                     <Info>
-                      <DefaultData>60000B20</DefaultData>
+                      <DefaultData>200B0060</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR temperature [11]</Name>
                     <Info>
-                      <DefaultData>60000C20</DefaultData>
+                      <DefaultData>200C0060</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR temperature [12]</Name>
                     <Info>
-                      <DefaultData>60000D20</DefaultData>
+                      <DefaultData>200D0060</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR temperature [13]</Name>
                     <Info>
-                      <DefaultData>60000E20</DefaultData>
+                      <DefaultData>200E0060</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR temperature [14]</Name>
                     <Info>
-                      <DefaultData>60000F20</DefaultData>
+                      <DefaultData>200F0060</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR temperature [15]</Name>
                     <Info>
-                      <DefaultData>60001020</DefaultData>
+                      <DefaultData>20100060</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR temperature [16]</Name>
                     <Info>
-                      <DefaultData>60001120</DefaultData>
+                      <DefaultData>20110060</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR temperature [17]</Name>
                     <Info>
-                      <DefaultData>60001220</DefaultData>
+                      <DefaultData>20120060</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR temperature [18]</Name>
                     <Info>
-                      <DefaultData>60001320</DefaultData>
+                      <DefaultData>20130060</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR temperature [19]</Name>
                     <Info>
-                      <DefaultData>60001420</DefaultData>
+                      <DefaultData>20140060</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR temperature [20]</Name>
                     <Info>
-                      <DefaultData>60001520</DefaultData>
+                      <DefaultData>20150060</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR temperature [21]</Name>
                     <Info>
-                      <DefaultData>60001620</DefaultData>
+                      <DefaultData>20160060</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR temperature [22]</Name>
                     <Info>
-                      <DefaultData>60001720</DefaultData>
+                      <DefaultData>20170060</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR temperature [23]</Name>
                     <Info>
-                      <DefaultData>60001820</DefaultData>
+                      <DefaultData>20180060</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR temperature [24]</Name>
                     <Info>
-                      <DefaultData>60001920</DefaultData>
+                      <DefaultData>20190060</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR high fault [0]</Name>
                     <Info>
-                      <DefaultData>60010110</DefaultData>
+                      <DefaultData>10010160</DefaultData>
                     </Info>
                   </SubItem>
                   <SubItem>
                     <Name>RTR high fault [1]</Name>
                     <Info>
-                      <DefaultData>60010210</DefaultData>
+                      <DefaultData>10020160</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR high fault [2]</Name>
                     <Info>
-                      <DefaultData>60010310</DefaultData>
+                      <DefaultData>10030160</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR high fault [3]</Name>
                     <Info>
-                      <DefaultData>60010410</DefaultData>
+                      <DefaultData>10040160</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR high fault [4]</Name>
                     <Info>
-                      <DefaultData>60010510</DefaultData>
+                      <DefaultData>10050160</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR high fault [5]</Name>
                     <Info>
-                      <DefaultData>60010610</DefaultData>
+                      <DefaultData>10060160</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR high fault [6]</Name>
                     <Info>
-                      <DefaultData>60010710</DefaultData>
+                      <DefaultData>10070160</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR high fault [7]</Name>
                     <Info>
-                      <DefaultData>60010810</DefaultData>
+                      <DefaultData>10080160</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR high fault [8]</Name>
                     <Info>
-                      <DefaultData>60010910</DefaultData>
+                      <DefaultData>10090160</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR high fault [9]</Name>
                     <Info>
-                      <DefaultData>60010A10</DefaultData>
+                      <DefaultData>100A0160</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR high fault [10]</Name>
                     <Info>
-                      <DefaultData>60010B10</DefaultData>
+                      <DefaultData>100B0160</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR high fault [11]</Name>
                     <Info>
-                      <DefaultData>60010C10</DefaultData>
+                      <DefaultData>100C0160</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR high fault [12]</Name>
                     <Info>
-                      <DefaultData>60010D10</DefaultData>
+                      <DefaultData>100D0160</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR high fault [13]</Name>
                     <Info>
-                      <DefaultData>60010E10</DefaultData>
+                      <DefaultData>100E0160</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR high fault [14]</Name>
                     <Info>
-                      <DefaultData>60010F10</DefaultData>
+                      <DefaultData>100F0160</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR high fault [15]</Name>
                     <Info>
-                      <DefaultData>60011010</DefaultData>
+                      <DefaultData>10100160</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR high fault [16]</Name>
                     <Info>
-                      <DefaultData>60011110</DefaultData>
+                      <DefaultData>10110160</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR high fault [17]</Name>
                     <Info>
-                      <DefaultData>60011210</DefaultData>
+                      <DefaultData>10120160</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR high fault [18]</Name>
                     <Info>
-                      <DefaultData>60011310</DefaultData>
+                      <DefaultData>10130160</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR high fault [19]</Name>
                     <Info>
-                      <DefaultData>60011410</DefaultData>
+                      <DefaultData>10140160</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR high fault [20]</Name>
                     <Info>
-                      <DefaultData>60011510</DefaultData>
+                      <DefaultData>10150160</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR high fault [21]</Name>
                     <Info>
-                      <DefaultData>60011610</DefaultData>
+                      <DefaultData>10160160</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR high fault [22]</Name>
                     <Info>
-                      <DefaultData>60011710</DefaultData>
+                      <DefaultData>10170160</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR high fault [23]</Name>
                     <Info>
-                      <DefaultData>60011810</DefaultData>
+                      <DefaultData>10180160</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR high fault [24]</Name>
                     <Info>
-                      <DefaultData>60011910</DefaultData>
+                      <DefaultData>10190160</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR low fault [0]</Name>
                     <Info>
-                      <DefaultData>60020110</DefaultData>
+                      <DefaultData>10010260</DefaultData>
                     </Info>
                   </SubItem>
                   <SubItem>
                     <Name>RTR low fault [1]</Name>
                     <Info>
-                      <DefaultData>60020210</DefaultData>
+                      <DefaultData>10020260</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR low fault [2]</Name>
                     <Info>
-                      <DefaultData>60020310</DefaultData>
+                      <DefaultData>10030260</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR low fault [3]</Name>
                     <Info>
-                      <DefaultData>60020410</DefaultData>
+                      <DefaultData>10040260</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR low fault [4]</Name>
                     <Info>
-                      <DefaultData>60020510</DefaultData>
+                      <DefaultData>10050260</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR low fault [5]</Name>
                     <Info>
-                      <DefaultData>60020610</DefaultData>
+                      <DefaultData>10060260</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR low fault [6]</Name>
                     <Info>
-                      <DefaultData>60020710</DefaultData>
+                      <DefaultData>10070260</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR low fault [7]</Name>
                     <Info>
-                      <DefaultData>60020810</DefaultData>
+                      <DefaultData>10080260</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR low fault [8]</Name>
                     <Info>
-                      <DefaultData>60020910</DefaultData>
+                      <DefaultData>10090260</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR low fault [9]</Name>
                     <Info>
-                      <DefaultData>60020A10</DefaultData>
+                      <DefaultData>100A0260</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR low fault [10]</Name>
                     <Info>
-                      <DefaultData>60020B10</DefaultData>
+                      <DefaultData>100B0260</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR low fault [11]</Name>
                     <Info>
-                      <DefaultData>60020C10</DefaultData>
+                      <DefaultData>100C0260</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR low fault [12]</Name>
                     <Info>
-                      <DefaultData>60020D10</DefaultData>
+                      <DefaultData>100D0260</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR low fault [13]</Name>
                     <Info>
-                      <DefaultData>60020E10</DefaultData>
+                      <DefaultData>100E0260</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR low fault [14]</Name>
                     <Info>
-                      <DefaultData>60020F10</DefaultData>
+                      <DefaultData>100F0260</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR low fault [15]</Name>
                     <Info>
-                      <DefaultData>60021010</DefaultData>
+                      <DefaultData>10100260</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR low fault [16]</Name>
                     <Info>
-                      <DefaultData>60021110</DefaultData>
+                      <DefaultData>10110260</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR low fault [17]</Name>
                     <Info>
-                      <DefaultData>60021210</DefaultData>
+                      <DefaultData>10120260</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR low fault [18]</Name>
                     <Info>
-                      <DefaultData>60021310</DefaultData>
+                      <DefaultData>10130260</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR low fault [19]</Name>
                     <Info>
-                      <DefaultData>60021410</DefaultData>
+                      <DefaultData>10140260</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR low fault [20]</Name>
                     <Info>
-                      <DefaultData>60021510</DefaultData>
+                      <DefaultData>10150260</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR low fault [21]</Name>
                     <Info>
-                      <DefaultData>60021610</DefaultData>
+                      <DefaultData>10160260</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR low fault [22]</Name>
                     <Info>
-                      <DefaultData>60021710</DefaultData>
+                      <DefaultData>10170260</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR low fault [23]</Name>
                     <Info>
-                      <DefaultData>60021810</DefaultData>
+                      <DefaultData>10180260</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR low fault [24]</Name>
                     <Info>
-                      <DefaultData>60021910</DefaultData>
+                      <DefaultData>10190260</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR fault status [0]</Name>
                     <Info>
-                      <DefaultData>60030110</DefaultData>
+                      <DefaultData>10010360</DefaultData>
                     </Info>
                   </SubItem>
                   <SubItem>
                     <Name>RTR fault status [1]</Name>
                     <Info>
-                      <DefaultData>60030210</DefaultData>
+                      <DefaultData>10020360</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR fault status [2]</Name>
                     <Info>
-                      <DefaultData>60030310</DefaultData>
+                      <DefaultData>10030360</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR fault status [3]</Name>
                     <Info>
-                      <DefaultData>60030410</DefaultData>
+                      <DefaultData>10040360</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR fault status [4]</Name>
                     <Info>
-                      <DefaultData>60030510</DefaultData>
+                      <DefaultData>10050360</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR fault status [5]</Name>
                     <Info>
-                      <DefaultData>60030610</DefaultData>
+                      <DefaultData>10060360</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR fault status [6]</Name>
                     <Info>
-                      <DefaultData>60030710</DefaultData>
+                      <DefaultData>10070360</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR fault status [7]</Name>
                     <Info>
-                      <DefaultData>60030810</DefaultData>
+                      <DefaultData>10080360</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR fault status [8]</Name>
                     <Info>
-                      <DefaultData>60030910</DefaultData>
+                      <DefaultData>10090360</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR fault status [9]</Name>
                     <Info>
-                      <DefaultData>60030A10</DefaultData>
+                      <DefaultData>100A0360</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR fault status [10]</Name>
                     <Info>
-                      <DefaultData>60030B10</DefaultData>
+                      <DefaultData>100B0360</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR fault status [11]</Name>
                     <Info>
-                      <DefaultData>60030C10</DefaultData>
+                      <DefaultData>100C0360</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR fault status [12]</Name>
                     <Info>
-                      <DefaultData>60030D10</DefaultData>
+                      <DefaultData>100D0360</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR fault status [13]</Name>
                     <Info>
-                      <DefaultData>60030E10</DefaultData>
+                      <DefaultData>100E0360</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR fault status [14]</Name>
                     <Info>
-                      <DefaultData>60030F10</DefaultData>
+                      <DefaultData>100F0360</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR fault status [15]</Name>
                     <Info>
-                      <DefaultData>60031010</DefaultData>
+                      <DefaultData>10100360</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR fault status [16]</Name>
                     <Info>
-                      <DefaultData>60031110</DefaultData>
+                      <DefaultData>10110360</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR fault status [17]</Name>
                     <Info>
-                      <DefaultData>60031210</DefaultData>
+                      <DefaultData>10120360</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR fault status [18]</Name>
                     <Info>
-                      <DefaultData>60031310</DefaultData>
+                      <DefaultData>10130360</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR fault status [19]</Name>
                     <Info>
-                      <DefaultData>60031410</DefaultData>
+                      <DefaultData>10140360</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR fault status [20]</Name>
                     <Info>
-                      <DefaultData>60031510</DefaultData>
+                      <DefaultData>10150360</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR fault status [21]</Name>
                     <Info>
-                      <DefaultData>60031610</DefaultData>
+                      <DefaultData>10160360</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR fault status [22]</Name>
                     <Info>
-                      <DefaultData>60031710</DefaultData>
+                      <DefaultData>10170360</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR fault status [23]</Name>
                     <Info>
-                      <DefaultData>60031810</DefaultData>
+                      <DefaultData>10180360</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>RTR fault status [24]</Name>
                     <Info>
-                      <DefaultData>60031910</DefaultData>
+                      <DefaultData>10190360</DefaultData>
                     </Info>
                   </SubItem>
                 </Info>
@@ -4215,37 +4215,37 @@
                   <SubItem>
                     <Name>IMU ax [0]</Name>
                     <Info>
-                      <DefaultData>60040120</DefaultData>
+                      <DefaultData>20010460</DefaultData>
                     </Info>
                   </SubItem>
                   <SubItem>
                     <Name>IMU ay [0]</Name>
                     <Info>
-                      <DefaultData>60050120</DefaultData>
+                      <DefaultData>20010560</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>IMU az [0]</Name>
                     <Info>
-                      <DefaultData>60060120</DefaultData>
+                      <DefaultData>20010660</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>IMU wx [0]</Name>
                     <Info>
-                      <DefaultData>60070120</DefaultData>
+                      <DefaultData>20010760</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>IMU wy [0]</Name>
                     <Info>
-                      <DefaultData>60080120</DefaultData>
+                      <DefaultData>20010860</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>IMU wz [0]</Name>
                     <Info>
-                      <DefaultData>60090120</DefaultData>
+                      <DefaultData>20010960</DefaultData>
                     </Info>
                   </SubItem>
                 </Info>
@@ -4268,25 +4268,25 @@
                   <SubItem>
                     <Name>Photo millivolts [0]</Name>
                     <Info>
-                      <DefaultData>600A0110</DefaultData>
+                      <DefaultData>10010A60</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>Photo millivolts [1]</Name>
                     <Info>
-                      <DefaultData>600A0210</DefaultData>
+                      <DefaultData>10020A60</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>Photo millivolts [2]</Name>
                     <Info>
-                      <DefaultData>600A0310</DefaultData>
+                      <DefaultData>10030A60</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>Photo millivolts [3]</Name>
                     <Info>
-                      <DefaultData>600A0410</DefaultData>
+                      <DefaultData>10040A60</DefaultData>
                     </Info>
                   </SubItem>
                 </Info>
@@ -4309,13 +4309,13 @@
                   <SubItem>
                     <Name>Pyrometer temperature [0]</Name>
                     <Info>
-                      <DefaultData>600B0120</DefaultData>
+                      <DefaultData>20010B60</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>Pyrometer temperature [1]</Name>
                     <Info>
-                      <DefaultData>600B0220</DefaultData>
+                      <DefaultData>20020B60</DefaultData>
                     </Info>
                   </SubItem>
                 </Info>
@@ -4338,49 +4338,49 @@
                   <SubItem>
                     <Name>LED state [0]</Name>
                     <Info>
-                      <DefaultData>70000108</DefaultData>
+                      <DefaultData>08010070</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>LED state [1]</Name>
                     <Info>
-                      <DefaultData>70000208</DefaultData>
+                      <DefaultData>08020070</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>LED state [2]</Name>
                     <Info>
-                      <DefaultData>70000308</DefaultData>
+                      <DefaultData>08030070</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>LED state [3]</Name>
                     <Info>
-                      <DefaultData>70000408</DefaultData>
+                      <DefaultData>08040070</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>LED state [4]</Name>
                     <Info>
-                      <DefaultData>70000508</DefaultData>
+                      <DefaultData>08050070</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>LED state [5]</Name>
                     <Info>
-                      <DefaultData>70000608</DefaultData>
+                      <DefaultData>08060070</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>LED state [6]</Name>
                     <Info>
-                      <DefaultData>70000708</DefaultData>
+                      <DefaultData>08070070</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>LED state [7]</Name>
                     <Info>
-                      <DefaultData>70000808</DefaultData>
+                      <DefaultData>08080070</DefaultData>
                     </Info>
                   </SubItem>
                 </Info>
@@ -4403,49 +4403,49 @@
                   <SubItem>
                     <Name>24V power supply state [0]</Name>
                     <Info>
-                      <DefaultData>70010108</DefaultData>
+                      <DefaultData>08010170</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>24V power supply state [1]</Name>
                     <Info>
-                      <DefaultData>70010208</DefaultData>
+                      <DefaultData>08020170</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>24V power supply state [2]</Name>
                     <Info>
-                      <DefaultData>70010308</DefaultData>
+                      <DefaultData>08030170</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>24V power supply state [3]</Name>
                     <Info>
-                      <DefaultData>70010408</DefaultData>
+                      <DefaultData>08040170</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>24V power supply state [4]</Name>
                     <Info>
-                      <DefaultData>70010508</DefaultData>
+                      <DefaultData>08050170</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>24V power supply state [5]</Name>
                     <Info>
-                      <DefaultData>70010608</DefaultData>
+                      <DefaultData>08060170</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>24V power supply state [6]</Name>
                     <Info>
-                      <DefaultData>70010708</DefaultData>
+                      <DefaultData>08070170</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>24V power supply state [7]</Name>
                     <Info>
-                      <DefaultData>70010808</DefaultData>
+                      <DefaultData>08080170</DefaultData>
                     </Info>
                   </SubItem>
                 </Info>
@@ -4468,49 +4468,49 @@
                   <SubItem>
                     <Name>20V power supply state [0]</Name>
                     <Info>
-                      <DefaultData>70020108</DefaultData>
+                      <DefaultData>08010270</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>20V power supply state [1]</Name>
                     <Info>
-                      <DefaultData>70020208</DefaultData>
+                      <DefaultData>08020270</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>20V power supply state [2]</Name>
                     <Info>
-                      <DefaultData>70020308</DefaultData>
+                      <DefaultData>08030270</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>20V power supply state [3]</Name>
                     <Info>
-                      <DefaultData>70020408</DefaultData>
+                      <DefaultData>08040270</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>20V power supply state [4]</Name>
                     <Info>
-                      <DefaultData>70020508</DefaultData>
+                      <DefaultData>08050270</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>20V power supply state [5]</Name>
                     <Info>
-                      <DefaultData>70020608</DefaultData>
+                      <DefaultData>08060270</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>20V power supply state [6]</Name>
                     <Info>
-                      <DefaultData>70020708</DefaultData>
+                      <DefaultData>08070270</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>20V power supply state [7]</Name>
                     <Info>
-                      <DefaultData>70020808</DefaultData>
+                      <DefaultData>08080270</DefaultData>
                     </Info>
                   </SubItem>
                 </Info>
@@ -4533,13 +4533,13 @@
                   <SubItem>
                     <Name>5V power supply state [0]</Name>
                     <Info>
-                      <DefaultData>70030108</DefaultData>
+                      <DefaultData>08010370</DefaultData>
                     </Info>
                   </SubItem>
 				  <SubItem>
                     <Name>5V power supply state [1]</Name>
                     <Info>
-                      <DefaultData>70030208</DefaultData>
+                      <DefaultData>08020370</DefaultData>
                     </Info>
                   </SubItem>
                 </Info>
