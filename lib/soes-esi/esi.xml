@@ -2662,7 +2662,7 @@
               </DataType>
 			  <DataType>
                 <Name>DT7000ARR</Name>
-                <BaseType>UINT</BaseType>
+                <BaseType>USINT</BaseType>
                 <BitSize>64</BitSize>
                 <ArrayInfo>
                   <LBound>1</LBound>
@@ -2694,7 +2694,7 @@
               </DataType>
 			  <DataType>
                 <Name>DT7001ARR</Name>
-                <BaseType>UINT</BaseType>
+                <BaseType>USINT</BaseType>
                 <BitSize>64</BitSize>
                 <ArrayInfo>
                   <LBound>1</LBound>
@@ -2726,7 +2726,7 @@
               </DataType>
 			  <DataType>
                 <Name>DT7002ARR</Name>
-                <BaseType>UINT</BaseType>
+                <BaseType>USINT</BaseType>
                 <BitSize>64</BitSize>
                 <ArrayInfo>
                   <LBound>1</LBound>
@@ -2758,7 +2758,7 @@
               </DataType>
 			  <DataType>
                 <Name>DT7003ARR</Name>
-                <BaseType>UINT</BaseType>
+                <BaseType>USINT</BaseType>
                 <BitSize>16</BitSize>
                 <ArrayInfo>
                   <LBound>1</LBound>
@@ -2790,7 +2790,7 @@
               </DataType>
 			  <DataType>
                 <Name>DT8000ARR</Name>
-                <BaseType>UINT</BaseType>
+                <BaseType>USINT</BaseType>
                 <BitSize>200</BitSize>
                 <ArrayInfo>
                   <LBound>1</LBound>
@@ -3573,7 +3573,7 @@
                     </Info>
                   </SubItem>
                   <SubItem>
-                    <Name>24V power supply state [1]</Name>
+                    <Name>5V power supply state [1]</Name>
                     <Info>
 					  <DefaultData>08020370</DefaultData>
                     </Info>
@@ -7907,7 +7907,7 @@
         <Sm DefaultSize="512" StartAddress="#x1200" ControlByte="#x22" Enable="1">MBoxIn</Sm>
         <Sm StartAddress="#x1600" ControlByte="#x24" Enable="1">Outputs</Sm>
         <Sm StartAddress="#x1A00" ControlByte="#x20" Enable="1">Inputs</Sm>
-        <RxPdo Fixed="true" Mandatory="true" Sm="2">
+        <RxPdo Fixed="true" Mandatory="false" Sm="2">
           <Index>#x1600</Index>
           <Name>LED state RXPDO</Name>
           <Entry>
@@ -7967,7 +7967,7 @@
             <DataType>USINT</DataType>
           </Entry>
         </RxPdo>
-		<RxPdo Fixed="true" Mandatory="true" Sm="2">
+		<RxPdo Fixed="true" Mandatory="false" Sm="2">
           <Index>#x1601</Index>
           <Name>24V power supply state</Name>
           <Entry>
@@ -8105,7 +8105,7 @@
             <DataType>USINT</DataType>
           </Entry>
         </RxPdo>
-        <TxPdo Fixed="true" Mandatory="true" Sm="3">
+        <TxPdo Fixed="true" Mandatory="false" Sm="3">
           <Index>#x1A00</Index>
           <Name>RTR temperature TXPDO</Name>
           <Entry>
@@ -8809,7 +8809,7 @@
             <DataType>UINT</DataType>
           </Entry>
         </TxPdo>
-        <TxPdo Fixed="true" Mandatory="true" Sm="3">
+        <TxPdo Fixed="true" Mandatory="false" Sm="3">
           <Index>#x1A01</Index>
           <Name>IMU TXPDO</Name>
           <Entry>
@@ -8855,7 +8855,7 @@
             <DataType>UDINT</DataType>
           </Entry>
         </TxPdo>
-        <TxPdo Fixed="true" Mandatory="true" Sm="3">
+        <TxPdo Fixed="true" Mandatory="false" Sm="3">
           <Index>#x1A02</Index>
           <Name>Photo millivolts TXPDO</Name>
           <Entry>
@@ -8887,7 +8887,7 @@
             <DataType>UINT</DataType>
           </Entry>
         </TxPdo>
-		<TxPdo Fixed="true" Mandatory="true" Sm="3">
+		<TxPdo Fixed="true" Mandatory="false" Sm="3">
           <Index>#x1A03</Index>
           <Name>Pyro temperature TXPDO</Name>
           <Entry>
@@ -8905,7 +8905,7 @@
             <DataType>UDINT</DataType>
           </Entry>
 		</TxPdo>
-		<TxPdo Fixed="true" Mandatory="true" Sm="3">
+		<TxPdo Fixed="true" Mandatory="false" Sm="3">
           <Index>#x1A04</Index>
           <Name>LED state TXPDO</Name>
           <Entry>
@@ -8965,7 +8965,7 @@
             <DataType>USINT</DataType>
           </Entry>
 		</TxPdo>
-		<TxPdo Fixed="true" Mandatory="true" Sm="3">
+		<TxPdo Fixed="true" Mandatory="false" Sm="3">
           <Index>#x1A05</Index>
           <Name>24V power supply state TXPDO</Name>
           <Entry>
@@ -9025,7 +9025,7 @@
             <DataType>USINT</DataType>
           </Entry>
 		</TxPdo>
-		<TxPdo Fixed="true" Mandatory="true" Sm="3">
+		<TxPdo Fixed="true" Mandatory="false" Sm="3">
           <Index>#x1A06</Index>
           <Name>20V power supply state TXPDO</Name>
           <Entry>
@@ -9085,7 +9085,7 @@
             <DataType>USINT</DataType>
           </Entry>
 		</TxPdo>
-		<TxPdo Fixed="true" Mandatory="true" Sm="3">
+		<TxPdo Fixed="true" Mandatory="false" Sm="3">
           <Index>#x1A07</Index>
           <Name>5V power supply state TXPDO</Name>
           <Entry>

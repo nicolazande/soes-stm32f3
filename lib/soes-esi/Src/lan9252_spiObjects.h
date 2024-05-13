@@ -298,7 +298,7 @@ TOBJ1603;
 */
 PROTO TOBJ1603 _5VPowerSupplyStateRXPDO0x1603
 #if defined(_LAN9252_SPI_) && (_LAN9252_SPI_ == 1)
-={2,0x70030108,0}
+={2,0x70030108,0x70030208}
 #endif
 ;
 /** @}*/
@@ -1920,7 +1920,7 @@ PROTO TOBJ600B PyroTemperature0x600B
 */
 OBJCONST TSDOINFOENTRYDESC    OBJMEM asEntryDesc0x7000[] = {
 { DEFTYPE_UNSIGNED8 , 0x8 , ACCESS_READ },
-{ DEFTYPE_UNSIGNED16 , 0x08 , ACCESS_READWRITE }};
+{ DEFTYPE_UNSIGNED8 , 0x08 , ACCESS_READWRITE }};
 
 /**
 * \brief Object name definition<br>
@@ -1935,7 +1935,7 @@ OBJCONST UCHAR OBJMEM aName0x7000[] = "LED state\000\377";
 */
 typedef struct OBJ_STRUCT_PACKED_START {
 UINT16   u16SubIndex0;  /**< \brief Subindex 0 */
-UINT16 aEntries[8];  /**< \brief Subindex 1 - 8 */
+UINT8 aEntries[8];  /**< \brief Subindex 1 - 8 */
 } OBJ_STRUCT_PACKED_END
 TOBJ7000;
 #endif //#ifndef _LAN9252_SPI_OBJECTS_H_
@@ -1969,7 +1969,7 @@ PROTO TOBJ7000 LEDState0x7000
 */
 OBJCONST TSDOINFOENTRYDESC    OBJMEM asEntryDesc0x7001[] = {
 { DEFTYPE_UNSIGNED8 , 0x8 , ACCESS_READ },
-{ DEFTYPE_UNSIGNED16 , 0x08 , ACCESS_READWRITE }};
+{ DEFTYPE_UNSIGNED8 , 0x08 , ACCESS_READWRITE }};
 
 /**
 * \brief Object name definition<br>
@@ -1984,7 +1984,7 @@ OBJCONST UCHAR OBJMEM aName0x7001[] = "24V power supply state\000\377";
 */
 typedef struct OBJ_STRUCT_PACKED_START {
 UINT16   u16SubIndex0;  /**< \brief Subindex 0 */
-UINT16 aEntries[8];  /**< \brief Subindex 1 - 8 */
+UINT8 aEntries[8];  /**< \brief Subindex 1 - 8 */
 } OBJ_STRUCT_PACKED_END
 TOBJ7001;
 #endif //#ifndef _LAN9252_SPI_OBJECTS_H_
@@ -2018,7 +2018,7 @@ PROTO TOBJ7001 _24VPowerSupplyState0x7001
 */
 OBJCONST TSDOINFOENTRYDESC    OBJMEM asEntryDesc0x7002[] = {
 { DEFTYPE_UNSIGNED8 , 0x8 , ACCESS_READ },
-{ DEFTYPE_UNSIGNED16 , 0x08 , ACCESS_READWRITE }};
+{ DEFTYPE_UNSIGNED8 , 0x08 , ACCESS_READWRITE }};
 
 /**
 * \brief Object name definition<br>
@@ -2033,7 +2033,7 @@ OBJCONST UCHAR OBJMEM aName0x7002[] = "20V power supply state\000\377";
 */
 typedef struct OBJ_STRUCT_PACKED_START {
 UINT16   u16SubIndex0;  /**< \brief Subindex 0 */
-UINT16 aEntries[8];  /**< \brief Subindex 1 - 8 */
+UINT8 aEntries[8];  /**< \brief Subindex 1 - 8 */
 } OBJ_STRUCT_PACKED_END
 TOBJ7002;
 #endif //#ifndef _LAN9252_SPI_OBJECTS_H_
@@ -2067,7 +2067,7 @@ PROTO TOBJ7002 _20VPowerSupplyState0x7002
 */
 OBJCONST TSDOINFOENTRYDESC    OBJMEM asEntryDesc0x7003[] = {
 { DEFTYPE_UNSIGNED8 , 0x8 , ACCESS_READ },
-{ DEFTYPE_UNSIGNED16 , 0x08 , ACCESS_READWRITE }};
+{ DEFTYPE_UNSIGNED8 , 0x08 , ACCESS_READWRITE }};
 
 /**
 * \brief Object name definition<br>
@@ -2082,7 +2082,7 @@ OBJCONST UCHAR OBJMEM aName0x7003[] = "5V power supply state\000\377";
 */
 typedef struct OBJ_STRUCT_PACKED_START {
 UINT16   u16SubIndex0;  /**< \brief Subindex 0 */
-UINT16 aEntries[2];  /**< \brief Subindex 1 - 2 */
+UINT8 aEntries[2];  /**< \brief Subindex 1 - 2 */
 } OBJ_STRUCT_PACKED_END
 TOBJ7003;
 #endif //#ifndef _LAN9252_SPI_OBJECTS_H_
@@ -2116,7 +2116,7 @@ PROTO TOBJ7003 _5VPowerSupplyState0x7003
 */
 OBJCONST TSDOINFOENTRYDESC    OBJMEM asEntryDesc0x8000[] = {
 { DEFTYPE_UNSIGNED8 , 0x8 , ACCESS_READ },
-{ DEFTYPE_UNSIGNED16 , 0x08 , ACCESS_READWRITE }};
+{ DEFTYPE_UNSIGNED8 , 0x08 , ACCESS_READWRITE }};
 
 /**
 * \brief Object name definition<br>
@@ -2131,7 +2131,7 @@ OBJCONST UCHAR OBJMEM aName0x8000[] = "RTD filter\000\377";
 */
 typedef struct OBJ_STRUCT_PACKED_START {
 UINT16   u16SubIndex0;  /**< \brief Subindex 0 */
-UINT16 aEntries[25];  /**< \brief Subindex 1 - 25 */
+UINT8 aEntries[25];  /**< \brief Subindex 1 - 25 */
 } OBJ_STRUCT_PACKED_END
 TOBJ8000;
 #endif //#ifndef _LAN9252_SPI_OBJECTS_H_
@@ -2795,15 +2795,15 @@ TOBJECT    OBJMEM ApplicationObjDic[] = {
 /* Object 0x600B */
 {NULL , NULL ,  0x600B , {DEFTYPE_UNSIGNED32 , 2 | (OBJCODE_ARR << 8)} , asEntryDesc0x600B , aName0x600B , &PyroTemperature0x600B , NULL , NULL , 0x0000 },
 /* Object 0x7000 */
-{NULL , NULL ,  0x7000 , {DEFTYPE_UNSIGNED16 , 8 | (OBJCODE_ARR << 8)} , asEntryDesc0x7000 , aName0x7000 , &LEDState0x7000 , NULL , NULL , 0x0000 },
+{NULL , NULL ,  0x7000 , {DEFTYPE_UNSIGNED8 , 8 | (OBJCODE_ARR << 8)} , asEntryDesc0x7000 , aName0x7000 , &LEDState0x7000 , NULL , NULL , 0x0000 },
 /* Object 0x7001 */
-{NULL , NULL ,  0x7001 , {DEFTYPE_UNSIGNED16 , 8 | (OBJCODE_ARR << 8)} , asEntryDesc0x7001 , aName0x7001 , &_24VPowerSupplyState0x7001 , NULL , NULL , 0x0000 },
+{NULL , NULL ,  0x7001 , {DEFTYPE_UNSIGNED8 , 8 | (OBJCODE_ARR << 8)} , asEntryDesc0x7001 , aName0x7001 , &_24VPowerSupplyState0x7001 , NULL , NULL , 0x0000 },
 /* Object 0x7002 */
-{NULL , NULL ,  0x7002 , {DEFTYPE_UNSIGNED16 , 8 | (OBJCODE_ARR << 8)} , asEntryDesc0x7002 , aName0x7002 , &_20VPowerSupplyState0x7002 , NULL , NULL , 0x0000 },
+{NULL , NULL ,  0x7002 , {DEFTYPE_UNSIGNED8 , 8 | (OBJCODE_ARR << 8)} , asEntryDesc0x7002 , aName0x7002 , &_20VPowerSupplyState0x7002 , NULL , NULL , 0x0000 },
 /* Object 0x7003 */
-{NULL , NULL ,  0x7003 , {DEFTYPE_UNSIGNED16 , 2 | (OBJCODE_ARR << 8)} , asEntryDesc0x7003 , aName0x7003 , &_5VPowerSupplyState0x7003 , NULL , NULL , 0x0000 },
+{NULL , NULL ,  0x7003 , {DEFTYPE_UNSIGNED8 , 2 | (OBJCODE_ARR << 8)} , asEntryDesc0x7003 , aName0x7003 , &_5VPowerSupplyState0x7003 , NULL , NULL , 0x0000 },
 /* Object 0x8000 */
-{NULL , NULL ,  0x8000 , {DEFTYPE_UNSIGNED16 , 25 | (OBJCODE_ARR << 8)} , asEntryDesc0x8000 , aName0x8000 , &RTDFilter0x8000 , NULL , NULL , 0x0000 },
+{NULL , NULL ,  0x8000 , {DEFTYPE_UNSIGNED8 , 25 | (OBJCODE_ARR << 8)} , asEntryDesc0x8000 , aName0x8000 , &RTDFilter0x8000 , NULL , NULL , 0x0000 },
 /* Object 0x8001 */
 {NULL , NULL ,  0x8001 , {DEFTYPE_UNSIGNED32 , 25 | (OBJCODE_ARR << 8)} , asEntryDesc0x8001 , aName0x8001 , &RTDVal_20x8001 , NULL , NULL , 0x0000 },
 /* Object 0x8002 */

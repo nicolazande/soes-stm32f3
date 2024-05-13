@@ -2715,7 +2715,7 @@
 							</DataType>
 							<DataType>
 								<Name>DT7000ARR</Name>
-								<BaseType>UINT</BaseType>
+								<BaseType>USINT</BaseType>
 								<BitSize>64</BitSize>
 								<ArrayInfo>
 									<LBound>1</LBound>
@@ -2747,7 +2747,7 @@
 							</DataType>
 							<DataType>
 								<Name>DT7001ARR</Name>
-								<BaseType>UINT</BaseType>
+								<BaseType>USINT</BaseType>
 								<BitSize>64</BitSize>
 								<ArrayInfo>
 									<LBound>1</LBound>
@@ -2779,7 +2779,7 @@
 							</DataType>
 							<DataType>
 								<Name>DT7002ARR</Name>
-								<BaseType>UINT</BaseType>
+								<BaseType>USINT</BaseType>
 								<BitSize>64</BitSize>
 								<ArrayInfo>
 									<LBound>1</LBound>
@@ -2811,7 +2811,7 @@
 							</DataType>
 							<DataType>
 								<Name>DT7003ARR</Name>
-								<BaseType>UINT</BaseType>
+								<BaseType>USINT</BaseType>
 								<BitSize>16</BitSize>
 								<ArrayInfo>
 									<LBound>1</LBound>
@@ -2843,7 +2843,7 @@
 							</DataType>
 							<DataType>
 								<Name>DT8000ARR</Name>
-								<BaseType>UINT</BaseType>
+								<BaseType>USINT</BaseType>
 								<BitSize>200</BitSize>
 								<ArrayInfo>
 									<LBound>1</LBound>
@@ -3595,6 +3595,12 @@
 										<Name>5V power supply state [0]</Name>
 										<Info>
 											<DefaultData>08010370</DefaultData>
+										</Info>
+									</SubItem>
+									<SubItem>
+										<Name>5V power supply state [1]</Name>
+										<Info>
+											<DefaultData>08020370</DefaultData>
 										</Info>
 									</SubItem>
 								</Info>
@@ -5155,9 +5161,9 @@
 				<Fmmu>MBoxState</Fmmu>
 				<Sm MinSize="#x22" MaxSize="#x100" DefaultSize="#x80" StartAddress="#x1000" ControlByte="#x26" Enable="1">MBoxOut</Sm>
 				<Sm MinSize="#x22" MaxSize="#x100" DefaultSize="#x80" StartAddress="#x1080" ControlByte="#x22" Enable="1">MBoxIn</Sm>
-				<Sm DefaultSize="25" StartAddress="#x1100" ControlByte="#x64" Enable="1">Outputs</Sm>
+				<Sm DefaultSize="26" StartAddress="#x1100" ControlByte="#x64" Enable="1">Outputs</Sm>
 				<Sm DefaultSize="316" StartAddress="#x1400" ControlByte="#x20" Enable="1">Inputs</Sm>
-				<RxPdo Fixed="true" Mandatory="true" Sm="2">
+				<RxPdo Fixed="true" Mandatory="false" Sm="2">
 					<Index>#x1600</Index>
 					<Name>LED state RXPDO</Name>
 					<Entry>
@@ -5165,59 +5171,59 @@
 						<SubIndex>1</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 001</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 					<Entry>
 						<Index>#x7000</Index>
 						<SubIndex>2</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 002</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 					<Entry>
 						<Index>#x7000</Index>
 						<SubIndex>3</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 003</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 					<Entry>
 						<Index>#x7000</Index>
 						<SubIndex>4</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 004</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 					<Entry>
 						<Index>#x7000</Index>
 						<SubIndex>5</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 005</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 					<Entry>
 						<Index>#x7000</Index>
 						<SubIndex>6</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 006</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 					<Entry>
 						<Index>#x7000</Index>
 						<SubIndex>7</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 007</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 					<Entry>
 						<Index>#x7000</Index>
 						<SubIndex>8</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 008</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 				</RxPdo>
-				<RxPdo Fixed="true" Mandatory="true" Sm="2">
+				<RxPdo Fixed="true" Mandatory="false" Sm="2">
 					<Index>#x1601</Index>
 					<Name>24V power supply state RXPDO</Name>
 					<Entry>
@@ -5225,56 +5231,56 @@
 						<SubIndex>1</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 001</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 					<Entry>
 						<Index>#x7001</Index>
 						<SubIndex>2</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 002</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 					<Entry>
 						<Index>#x7001</Index>
 						<SubIndex>3</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 003</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 					<Entry>
 						<Index>#x7001</Index>
 						<SubIndex>4</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 004</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 					<Entry>
 						<Index>#x7001</Index>
 						<SubIndex>5</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 005</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 					<Entry>
 						<Index>#x7001</Index>
 						<SubIndex>6</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 006</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 					<Entry>
 						<Index>#x7001</Index>
 						<SubIndex>7</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 007</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 					<Entry>
 						<Index>#x7001</Index>
 						<SubIndex>8</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 008</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 				</RxPdo>
 				<RxPdo Fixed="true" Mandatory="false" Sm="2">
@@ -5285,56 +5291,56 @@
 						<SubIndex>1</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 001</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 					<Entry>
 						<Index>#x7002</Index>
 						<SubIndex>2</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 002</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 					<Entry>
 						<Index>#x7002</Index>
 						<SubIndex>3</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 003</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 					<Entry>
 						<Index>#x7002</Index>
 						<SubIndex>4</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 004</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 					<Entry>
 						<Index>#x7002</Index>
 						<SubIndex>5</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 005</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 					<Entry>
 						<Index>#x7002</Index>
 						<SubIndex>6</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 006</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 					<Entry>
 						<Index>#x7002</Index>
 						<SubIndex>7</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 007</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 					<Entry>
 						<Index>#x7002</Index>
 						<SubIndex>8</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 008</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 				</RxPdo>
 				<RxPdo Fixed="true" Mandatory="false" Sm="2">
@@ -5345,15 +5351,17 @@
 						<SubIndex>1</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 001</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 					<Entry>
-						<Index>#x0</Index>
-						<SubIndex>0</SubIndex>
-						<BitLen>0</BitLen>
+						<Index>#x7003</Index>
+						<SubIndex>2</SubIndex>
+						<BitLen>8</BitLen>
+						<Name>SubIndex 002</Name>
+						<DataType>USINT</DataType>
 					</Entry>
 				</RxPdo>
-				<TxPdo Fixed="true" Mandatory="true" Sm="3">
+				<TxPdo Fixed="true" Mandatory="false" Sm="3">
 					<Index>#x1A00</Index>
 					<Name>RTR temperature TXPDO</Name>
 					<Entry>
@@ -6057,7 +6065,7 @@
 						<DataType>UINT</DataType>
 					</Entry>
 				</TxPdo>
-				<TxPdo Fixed="true" Mandatory="true" Sm="3">
+				<TxPdo Fixed="true" Mandatory="false" Sm="3">
 					<Index>#x1A01</Index>
 					<Name>IMU TXPDO</Name>
 					<Entry>
@@ -6103,7 +6111,7 @@
 						<DataType>UDINT</DataType>
 					</Entry>
 				</TxPdo>
-				<TxPdo Fixed="true" Mandatory="true" Sm="3">
+				<TxPdo Fixed="true" Mandatory="false" Sm="3">
 					<Index>#x1A02</Index>
 					<Name>Photo millivolts TXPDO</Name>
 					<Entry>
@@ -6135,7 +6143,7 @@
 						<DataType>UINT</DataType>
 					</Entry>
 				</TxPdo>
-				<TxPdo Fixed="true" Mandatory="true" Sm="3">
+				<TxPdo Fixed="true" Mandatory="false" Sm="3">
 					<Index>#x1A03</Index>
 					<Name>Pyrometer temperature TXPDO</Name>
 					<Entry>
@@ -6153,7 +6161,7 @@
 						<DataType>UDINT</DataType>
 					</Entry>
 				</TxPdo>
-				<TxPdo Fixed="true" Mandatory="true" Sm="3">
+				<TxPdo Fixed="true" Mandatory="false" Sm="3">
 					<Index>#x1A04</Index>
 					<Name>LED state TXPDO</Name>
 					<Entry>
@@ -6161,59 +6169,59 @@
 						<SubIndex>1</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 001</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 					<Entry>
 						<Index>#x7000</Index>
 						<SubIndex>2</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 002</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 					<Entry>
 						<Index>#x7000</Index>
 						<SubIndex>3</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 003</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 					<Entry>
 						<Index>#x7000</Index>
 						<SubIndex>4</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 004</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 					<Entry>
 						<Index>#x7000</Index>
 						<SubIndex>5</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 005</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 					<Entry>
 						<Index>#x7000</Index>
 						<SubIndex>6</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 006</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 					<Entry>
 						<Index>#x7000</Index>
 						<SubIndex>7</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 007</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 					<Entry>
 						<Index>#x7000</Index>
 						<SubIndex>8</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 008</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 				</TxPdo>
-				<TxPdo Fixed="true" Mandatory="true" Sm="3">
+				<TxPdo Fixed="true" Mandatory="false" Sm="3">
 					<Index>#x1A05</Index>
 					<Name>24V power supply state TXPDO</Name>
 					<Entry>
@@ -6221,59 +6229,59 @@
 						<SubIndex>1</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 001</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 					<Entry>
 						<Index>#x7001</Index>
 						<SubIndex>2</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 002</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 					<Entry>
 						<Index>#x7001</Index>
 						<SubIndex>3</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 003</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 					<Entry>
 						<Index>#x7001</Index>
 						<SubIndex>4</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 004</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 					<Entry>
 						<Index>#x7001</Index>
 						<SubIndex>5</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 005</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 					<Entry>
 						<Index>#x7001</Index>
 						<SubIndex>6</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 006</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 					<Entry>
 						<Index>#x7001</Index>
 						<SubIndex>7</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 007</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 					<Entry>
 						<Index>#x7001</Index>
 						<SubIndex>8</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 008</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 				</TxPdo>
-				<TxPdo Fixed="true" Mandatory="true" Sm="3">
+				<TxPdo Fixed="true" Mandatory="false" Sm="3">
 					<Index>#x1A06</Index>
 					<Name>20V power supply state TXPDO</Name>
 					<Entry>
@@ -6281,59 +6289,59 @@
 						<SubIndex>1</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 001</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 					<Entry>
 						<Index>#x7002</Index>
 						<SubIndex>2</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 002</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 					<Entry>
 						<Index>#x7002</Index>
 						<SubIndex>3</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 003</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 					<Entry>
 						<Index>#x7002</Index>
 						<SubIndex>4</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 004</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 					<Entry>
 						<Index>#x7002</Index>
 						<SubIndex>5</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 005</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 					<Entry>
 						<Index>#x7002</Index>
 						<SubIndex>6</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 006</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 					<Entry>
 						<Index>#x7002</Index>
 						<SubIndex>7</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 007</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 					<Entry>
 						<Index>#x7002</Index>
 						<SubIndex>8</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 008</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 				</TxPdo>
-				<TxPdo Fixed="true" Mandatory="true" Sm="3">
+				<TxPdo Fixed="true" Mandatory="false" Sm="3">
 					<Index>#x1A07</Index>
 					<Name>5V power supply state TXPDO</Name>
 					<Entry>
@@ -6341,14 +6349,14 @@
 						<SubIndex>1</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 001</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 					<Entry>
 						<Index>#x7003</Index>
 						<SubIndex>2</SubIndex>
 						<BitLen>8</BitLen>
 						<Name>SubIndex 002</Name>
-						<DataType>UINT</DataType>
+						<DataType>USINT</DataType>
 					</Entry>
 				</TxPdo>
 				<Mailbox DataLinkLayer="true">
