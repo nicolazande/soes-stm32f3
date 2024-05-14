@@ -48,9 +48,6 @@ static void SystemClock_Config(void);
 /** GPIO initialization function */
 static void MX_GPIO_Init(void);
 
-/** This function is executed in case of error occurrence */
-static void Error_Handler(void);
-
 
 /****************************************************************
  * Private function
@@ -93,7 +90,7 @@ static void MX_GPIO_Init(void)
 	__HAL_RCC_GPIOA_CLK_ENABLE();
 }
 
-static void Error_Handler(void)
+void Error_Handler(void)
 {
 	/* disable implementation to report the HAL error return state */
 	__disable_irq();
