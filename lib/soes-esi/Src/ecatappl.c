@@ -584,6 +584,37 @@ void Sync0_Isr(void)
 /*ECATCHANGE_START(V5.13) ECAT 6*/
         BOOL bCallInputMapping = FALSE;
 /*ECATCHANGE_END(V5.13) ECAT 6*/
+        UINT16  ALEvent = HW_GetALEventRegister_Isr();
+        ALEvent = SWAPWORD(ALEvent);
+
+
+        if (ALEvent & PROCESS_OUTPUT_EVENT)
+        {
+            /* Reset SM/Sync0 counter.*/
+            u16SmSync0Counter = 0;
+
+            if (sSyncManOutPar.u16SmEventMissedCounter > 0)
+            {
+                sSyncManOutPar.u16SmEventMissedCounter--;
+            }
+
+            sSyncManInPar.u16SmEventMissedCounter = sSyncManOutPar.u16SmEventMissedCounter;
+
+
+            /* Outputs were updated, set flag for watchdog monitoring */
+            bEcatFirstOutputsReceived = TRUE;
+
+
+            /* reset watchdog counter */
+            EcatWdCounter = 0;
+
+            if (bEcatOutputUpdateRunning)
+            {
+                /* Output mapping was not done by the PDI ISR */
+                PDO_OutputMapping();
+            }
+        }
+
 
 /*ECATCHANGE_START(V5.13) ECAT 6*/
         if ((bEcatInputUpdateRunning == TRUE) && (LatchInputSync0Value > 0) && (nPdInputSize > 0))
@@ -897,11 +928,6 @@ UINT16 MainInit(void)
 
 
 
-    pAPPL_FoeRead = NULL;
-    pAPPL_FoeReadData = NULL;
-    pAPPL_FoeError = NULL;
-    pAPPL_FoeWrite = NULL;
-    pAPPL_FoeWriteData = NULL;
 
     /* ECATCHANGE_START(V5.13) COE4*/
     pAPPL_CoeReadInd = NULL;

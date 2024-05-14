@@ -375,7 +375,6 @@ V5.01 : Start file change log
 ------    Global Variables
 ------
 -----------------------------------------------------------------------------------------*/
-PROTO    BOOL                           bBootMode; /**< \brief Indicates in slave is in BOOT mode*/
 PROTO    BOOL                           bEcatOutputUpdateRunning;  /**< \brief Indicates the OP state, will be set in StartOutputHandler
                                                                                 and reset in StopOutputHandler*/
 

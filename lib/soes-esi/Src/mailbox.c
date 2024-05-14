@@ -149,7 +149,6 @@ V4.07 ECAT 1: The sources for SPI and MCI were merged (in ecat_def.h<br>
 
 #include "ecatcoe.h"
 #include "sdoserv.h"
-#include "ecatfoe.h"
 #include "emcy.h"
 
 
@@ -328,7 +327,6 @@ UINT16 MBX_StartMailboxHandler(void)
         return ALSTATUSCODE_INVALIDMBXCFGINPREOP;
     }
 
-    u16FoeMaxSendBlockSize = (u16SendMbxSize - SIZEOF(TFOEHEADER) - MBX_HEADER_SIZE);
 
     /* enable the receive mailbox sync manager channel */
     EnableSyncManChannel(MAILBOX_WRITE);
@@ -401,7 +399,6 @@ void MBX_StopMailboxHandler(void)
     SDOS_ClearPendingResponse();
 
 
-    FOE_Init();
 
     psWriteMbx = NULL;
     psRepeatMbx = NULL;
@@ -455,22 +452,12 @@ UINT8 MailboxServiceInd(TMBX MBXMEM *pMbx)
 {
     UINT8 result;
 
-    /*only FoE is allowed in Boot mode*/
-    if(bBootMode == TRUE && (MBX_TYPE_FOE != ((pMbx->MbxHeader.Flags[MBX_OFFS_TYPE] & MBX_MASK_TYPE) >> MBX_SHIFT_TYPE )))
-    {
-        return MBXERR_UNSUPPORTEDPROTOCOL;
-    }
 
     switch ( (pMbx->MbxHeader.Flags[MBX_OFFS_TYPE] & MBX_MASK_TYPE) >> MBX_SHIFT_TYPE )
     {
     case MBX_TYPE_COE:
         /* CoE datagram received */
         result = COE_ServiceInd((TCOEMBX MBXMEM *) pMbx);
-        break;
-
-    case MBX_TYPE_FOE:
-        /* FoE datagram received */
-        result = FOE_ServiceInd((TFOEMBX MBXMEM *) pMbx);
         break;
 
     default:
@@ -617,14 +604,6 @@ void MBX_MailboxReadInd(void)
                 /*Set the pending CoE indication is an error occurred during the continue indication*/
                 u8MailboxSendReqStored |= COE_SERVICE;
             }
-        }
-        else
-        if ( u8MailboxSendReqStored & FOE_SERVICE )
-        {
-            /* reset the flag indicating that FoE service to be sent was stored */
-            u8MailboxSendReqStored &= ~FOE_SERVICE;
-            /* call FoE function that will send the stored FoE service */
-            FOE_ContinueInd(psWriteMbx);
         }
         else
 /*ECATCHANGE_START(V5.13) EOE1*/

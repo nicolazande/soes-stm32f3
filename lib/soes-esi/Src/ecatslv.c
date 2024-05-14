@@ -207,7 +207,6 @@ V4.00 ECAT 7: The return values for the AL-StatusCode were changed to UINT16
 #include "ecatappl.h"
 
 
-#include    "bootmode.h"
 
 
 
@@ -1025,6 +1024,21 @@ UINT16 StartInputHandler(void)
                 }
             } //if((dcControl & ESC_DC_SYNC0_ACTIVE_MASK) == 0)
 
+            /* Check if SM Sync Type is configured*/
+            if (nPdOutputSize > 0)
+            {
+                if ((SyncType0x1C32 == (UINT16)SYNCTYPE_SM_SYNCHRON) || ((nPdInputSize > 0) && (SyncType0x1C33 == (UINT16)SYNCTYPE_SM2_SYNCHRON)))
+                {
+                    return ALSTATUSCODE_SYNCHRONNOTSUPPORTED;
+                }
+            }
+            else if (nPdInputSize > 0)
+            {
+                if (SyncType0x1C33 == (UINT16)SYNCTYPE_SM_SYNCHRON)
+                {
+                    return ALSTATUSCODE_SYNCHRONNOTSUPPORTED;
+                }
+            }
         }
     } //if(bSyncSetByUser)
     else
@@ -1034,30 +1048,10 @@ UINT16 StartInputHandler(void)
         {
             /* Activation or auto activation of the Sync Out Unit is disabled => Free Run or SM Sync is configured*/
 
-            /* AL Event enabled => Configure SM Sync*/
-            if (nPdOutputSize > 0)
-            {
-                SyncType0x1C32 = SYNCTYPE_SM_SYNCHRON;
-                
-                if (nPdInputSize > 0)
-                {
-                    SyncType0x1C33 = SYNCTYPE_SM2_SYNCHRON;
-                }
-                else
-                {
-                    SyncType0x1C33 = SYNCTYPE_FREERUN;
-                }
-            }
-            else if (nPdInputSize > 0)
-            {
-                SyncType0x1C32 = SYNCTYPE_FREERUN;
-                SyncType0x1C33 = SYNCTYPE_SM_SYNCHRON;
-            }
-            else
-            {
-                SyncType0x1C32 = SYNCTYPE_FREERUN;
-                SyncType0x1C33 = SYNCTYPE_FREERUN;
-            }
+            /* In case of Free Run (AL_EVENT_ENABLED and DC_SUPPORTED are disabled) the Sync Type 0x1C3x.1 is read only => no validation required*/
+            SyncType0x1C32 = SYNCTYPE_FREERUN;
+            SyncType0x1C33 = SYNCTYPE_FREERUN;
+
 
         }
         else
@@ -1128,12 +1122,6 @@ UINT16 StartInputHandler(void)
         }
     }
 
-    /* If no free run is supported the EscInt is always enabled*/
-        if (( SyncType0x1C32 != SYNCTYPE_FREERUN ) || ( SyncType0x1C33 != SYNCTYPE_FREERUN ))
-        {
-        /* ECAT Synchron Mode, the ESC interrupt is enabled */
-        bEscIntEnabled = TRUE;
-    }
 
         /* Update value for AL Event Mask register (0x204) */
         if(bEscIntEnabled)
@@ -1222,8 +1210,6 @@ UINT16 StartInputHandler(void)
 
 
 
-    /* reset the error counter indicating synchronization problems */
-    sCycleDiag.syncFailedCounter = 0;
 
 
     /*
@@ -1487,7 +1473,6 @@ void StopInputHandler(void)
     }
     /* reset the flags */
     bEcatFirstOutputsReceived = FALSE;
-    bEscIntEnabled = FALSE;
 /*The application ESM function is separated from this function to handle pending transitions*/
 
     bDcSyncActive = FALSE;
@@ -1696,76 +1681,14 @@ void AL_ControlInd(UINT8 alControl, UINT16 alStatusCode)
         switch ( stateTrans )
         {
         case INIT_2_BOOT    :
-            /* if the application has to execute code when going to BOOT this shall be done at this place */
-            bBootMode = TRUE;
-
-            if ( CheckSmSettings(MAILBOX_READ+1) != 0 )
-            {
-                bBootMode = FALSE;
-                result = ALSTATUSCODE_INVALIDMBXCFGINBOOT;
-                break;
-            }
-/*ECATCHANGE_START(V5.13) ECAT1*/
-/*ECATCHANGE_END(V5.13) ECAT1*/
-            /* disable all events in BOOT state */
-            ResetALEventMask(0);
-
-            /* MBX_StartMailboxHandler (in mailbox.c) checks if the areas of the mailbox
-               sync managers SM0 and SM1 overlap each other
-              if result is unequal 0, the slave will stay in INIT
-              and sets the ErrorInd Bit (bit 4) of the AL-Status */
-            result = MBX_StartMailboxHandler();
-            if (result == 0)
-            {
-                bApplEsmPending = FALSE;
-                /* additionally there could be an application specific check (in ecatappl.c)
-                    if the state transition from INIT to BOOT should be done
-                    if result is NOERROR_INWORK, the slave will stay in INIT until timeout 
-                    or transition is complete by AL_ControlRes*/
-            
-                result = APPL_StartMailboxHandler();
-                if ( result == 0 )
-                {
-                    /*transition successful*/
-                    bMbxRunning = TRUE;
-                }
-            }
-
-            if(result != 0 && result != NOERROR_INWORK)
-            {
-                /*Stop APPL Mbx handler if the APPL start handler was called before*/
-                    if (!bApplEsmPending)
-                    {
-                        APPL_StopMailboxHandler();
-                    }
-
-                 MBX_StopMailboxHandler();
-            }
-
-            BL_Start( STATE_BOOT );
-
-            if (result != 0)
-            {
-                bBootMode = FALSE;
-            }
+            result = ALSTATUSCODE_BOOTNOTSUPP;
 
 
 
             break;
 
         case BOOT_2_INIT    :
-            if(bBootMode)
-            {
-                bBootMode = FALSE;
-/*ECATCHANGE_START(V5.13) ECAT1*/
-/*ECATCHANGE_END(V5.13) ECAT1*/
-                /* disable all events in BOOT state */
-                ResetALEventMask(0);
-                MBX_StopMailboxHandler();
-                result = APPL_StopMailboxHandler();
-            }
-
-            BL_Stop();
+            result = ALSTATUSCODE_BOOTNOTSUPP;
 
             BackToInitTransition();
 
@@ -2243,11 +2166,6 @@ void AL_ControlRes(void)
                     }
                     else
                     {
-                        if (nPdOutputSize > 0)
-                        {
-                            StatusCode = ALSTATUSCODE_SMWATCHDOG;
-                        }
-                        else
                         {
                             /*ECATCHANGE_START(V5.13) ESM1*/
                             if ((u8LocalErrorState & STATE_MASK) == STATE_SAFEOP)
@@ -2370,7 +2288,6 @@ void AL_ControlRes(void)
                         }
                         else
                         {
-                            if(nPdOutputSize == 0 || bEcatFirstOutputsReceived)
                             {
                                 bApplEsmPending = FALSE;  
                                 result = APPL_StartOutputHandler();
@@ -2436,6 +2353,7 @@ void ECAT_CheckWatchdog(void)
             {
                 //handle only the expired PD watchdog if outputs are configured
                 if (bEcatOutputUpdateRunning
+                    && bEcatFirstOutputsReceived
                     )
                 {
                     /* watchdog expired in OP */
@@ -2749,7 +2667,6 @@ void ECAT_Init(void)
     MBX_Init();
 
     /* initialize variables */
-    bBootMode = FALSE;
     bApplEsmPending = FALSE;
     bEcatWaitForAlControlRes = FALSE;
     bEcatFirstOutputsReceived = FALSE;

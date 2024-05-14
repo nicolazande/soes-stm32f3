@@ -802,34 +802,6 @@ UINT8 CheckSyncTypeValue(UINT16 index, UINT16 NewSyncType)
     case SYNCTYPE_FREERUN:
         return 0; //free run sync mode is always accepted
 
-    case SYNCTYPE_SM_SYNCHRON:
-        if ((index == 0x1C32) 
-            && (nPdOutputSize > 0) 
-            && ((sSyncManOutPar.u16SyncTypesSupported & SYNCTYPE_SYNCHRONSUPP) > 0))
-        {
-            /*SyncManager sync mode is supported and output process data is configured*/
-            return 0;
-        }
-        else
-        if ((index == 0x1C33) 
-            && ((sSyncManInPar.u16SyncTypesSupported & SYNCTYPE_SYNCHRONSUPP) > 0)
-            && (nPdOutputSize == 0) 
-            && (nPdInputSize > 0))
-            {
-                /*SyncManager sync mode is supported and input only shall be configured*/
-                return 0;
-            }
-        break;
-
-    case SYNCTYPE_SM2_SYNCHRON:
-        if ((index == 0x1C33) 
-            && ((sSyncManInPar.u16SyncTypesSupported & SYNCTYPE_SYNCHRONSUPP) > 0)
-            && (nPdOutputSize > 0))
-            {
-                /*SyncManager sync mode is supported and outputs are defined*/
-                return 0;
-            }
-        break;
 
     case SYNCTYPE_DCSYNC0:
         if ((index == 0x1C32) && ((sSyncManOutPar.u16SyncTypesSupported & SYNCTYPE_DCSYNC0SUPP) > 0))

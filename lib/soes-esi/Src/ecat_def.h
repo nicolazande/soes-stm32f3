@@ -169,7 +169,7 @@ AL_EVENT_ENABLED: If an interrupt routine shall be called when one of the Events
 this switch has to be defined to 1 (synchronous modes are supported). <br>
 If the AL Event register shall only be polled, this switch has to be defined to 0 (only free run mode is supported). */
 #ifndef AL_EVENT_ENABLED
-#define AL_EVENT_ENABLED                          1 //This define was already evaluated by ET9300 Project Handler(V. 1.5.3.0)!
+#define AL_EVENT_ENABLED                          0 //This define was already evaluated by ET9300 Project Handler(V. 1.5.3.0)!
 #endif
 
 /** 
@@ -349,7 +349,7 @@ STATIC_ETHERNET_BUFFER: If this switch is set a static buffer is used to store e
 /** 
 FOE_SUPPORTED: If the FoE services should be supported, then this switch shall be set.  */
 #ifndef FOE_SUPPORTED
-#define FOE_SUPPORTED                             1 //This define was already evaluated by ET9300 Project Handler(V. 1.5.3.0)!
+#define FOE_SUPPORTED                             0 //This define was already evaluated by ET9300 Project Handler(V. 1.5.3.0)!
 #endif
 
 /** 
@@ -362,13 +362,13 @@ MAILBOX_SUPPORTED: This switch is set automatically if at least one mailbox prot
 BOOTSTRAPMODE_SUPPORTED: If the firmware update over FoE services should be supported, then this switch shall be set.<br>
 If this switch is set, then also "FOE_SUPPORTED" shall be set.  */
 #ifndef BOOTSTRAPMODE_SUPPORTED
-#define BOOTSTRAPMODE_SUPPORTED                   1 //This define was already evaluated by ET9300 Project Handler(V. 1.5.3.0)!
+#define BOOTSTRAPMODE_SUPPORTED                   0 //This define was already evaluated by ET9300 Project Handler(V. 1.5.3.0)!
 #endif
 
 /** 
 OP_PD_REQUIRED: If this switch is reset the state transition SAFEOP_2_OP will also successful if no process data was received. The watchdog will only be active when first process data was received (bEcatFirstOutputsReceived) */
 #ifndef OP_PD_REQUIRED
-#define OP_PD_REQUIRED                            1 //This define was already evaluated by ET9300 Project Handler(V. 1.5.3.0)!
+#define OP_PD_REQUIRED                            0 //This define was already evaluated by ET9300 Project Handler(V. 1.5.3.0)!
 #endif
 
 /** 
