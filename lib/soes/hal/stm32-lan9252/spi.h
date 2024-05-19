@@ -37,6 +37,8 @@
 #define SPI_ESC_CPOL                   SPI_POLARITY_LOW
 #define SPI_ESC_CPHA                   SPI_PHASE_1EDGE
 
+#define SPI_GLOBAL_HANDLE
+
 
 /****************************************************************
  * Public functions

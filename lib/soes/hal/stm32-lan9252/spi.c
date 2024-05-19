@@ -26,18 +26,6 @@ void spi_setup(void)
 	/* data */
 	GPIO_InitTypeDef gpio = {0};
 
-	/* SPI Configuration */
-	SpiHandle.Instance = SPI_ESC;
-	SpiHandle.Init.Direction = SPI_DIRECTION_2LINES;
-	SpiHandle.Init.DataSize = SPI_DATASIZE_8BIT;
-	SpiHandle.Init.CLKPolarity = SPI_POLARITY_LOW;
-	SpiHandle.Init.CLKPhase = SPI_PHASE_1EDGE;
-	SpiHandle.Init.NSS = SPI_NSS_SOFT;
-	SpiHandle.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2;
-	SpiHandle.Init.FirstBit = SPI_FIRSTBIT_MSB;
-	SpiHandle.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
-	SpiHandle.Init.Mode = SPI_MODE_MASTER;
-
 	/* enable GPIO TX/RX clock */
 	ESC_SPI_SCK_GPIO_CLK_ENABLE();
 	ESC_SPI_MISO_GPIO_CLK_ENABLE();
@@ -46,29 +34,38 @@ void spi_setup(void)
 	/* enable SPI clock */
 	ESC_SPI_CLK_ENABLE();
 
+	/* CS */
+	HAL_GPIO_WritePin(ESC_GPIO_CS, ESC_GPIO_PIN_CS, GPIO_PIN_SET);
+	gpio.Pin = ESC_GPIO_PIN_CS;
+	gpio.Mode = GPIO_MODE_OUTPUT_PP;
+	gpio.Pull = GPIO_NOPULL;
+	gpio.Speed = GPIO_SPEED_FREQ_LOW;
+	HAL_GPIO_Init(ESC_GPIO_CS, &gpio);
+
 	/* SPI SCK Configuration */
-	gpio.Pin = ESC_GPIO_PIN_SCK;
+	gpio.Pin = ESC_GPIO_PIN_SCK | ESC_GPIO_PIN_MISO | ESC_GPIO_PIN_MOSI;
 	gpio.Mode = GPIO_MODE_AF_PP;
-	gpio.Pull = GPIO_PULLDOWN;
+	gpio.Pull = GPIO_NOPULL;
 	gpio.Speed = GPIO_SPEED_FREQ_HIGH;
 	gpio.Alternate = ESC_GPIO_AF_SPI;
 	HAL_GPIO_Init(ESC_GPIO_CTRL, &gpio);
 
-	/* SPI MISO Configuration */
-	gpio.Pin = ESC_GPIO_PIN_MISO;
-	gpio.Alternate = ESC_GPIO_AF_SPI;
-	HAL_GPIO_Init(ESC_GPIO_CTRL, &gpio);
+	/* SPI Configuration */
+	SpiHandle.Instance = SPI_ESC;
+	SpiHandle.Init.Direction = SPI_DIRECTION_2LINES;
+	SpiHandle.Init.DataSize = SPI_DATASIZE_8BIT;
+	SpiHandle.Init.CLKPolarity = SPI_POLARITY_LOW; //SPI_POLARITY_HIGH;
+	SpiHandle.Init.CLKPhase = SPI_PHASE_1EDGE; //SPI_PHASE_2EDGE;
+	SpiHandle.Init.NSS = SPI_NSS_SOFT;
+	SpiHandle.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_8;
+	SpiHandle.Init.FirstBit = SPI_FIRSTBIT_MSB;
+	SpiHandle.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
+	SpiHandle.Init.Mode = SPI_MODE_MASTER;
 
-	/* SPI MOSI Configuration */
-	gpio.Pin = ESC_GPIO_PIN_MOSI;
-	gpio.Alternate = ESC_GPIO_AF_SPI;
-	HAL_GPIO_Init(ESC_GPIO_CTRL, &gpio);
-
-	/* CS */
-	gpio.Pin = ESC_GPIO_PIN_CS;
-	gpio.Mode = GPIO_MODE_OUTPUT_PP;
-	gpio.Pull = GPIO_PULLUP;
-	HAL_GPIO_Init(ESC_GPIO_CS, &gpio);
+	SpiHandle.Init.TIMode = SPI_TIMODE_DISABLE;
+	SpiHandle.Init.CRCPolynomial = 7;
+	SpiHandle.Init.CRCLength = SPI_CRC_LENGTH_DATASIZE;
+	SpiHandle.Init.NSSPMode = SPI_NSS_PULSE_ENABLE; //NOTE: ?
 
 	/* initialize SPI */
 	HAL_SPI_Init(&SpiHandle);
@@ -130,7 +127,7 @@ inline static uint8_t spi_transfer(uint8_t byte)
 #ifdef SPI_GLOBAL_HANDLE
 
 	/* transmit and receive using global handle */
-	HAL_SPI_TransmitReceive(&SpiHandle, &byte, &byte, 1, 0);
+	HAL_SPI_TransmitReceive(&SpiHandle, &byte, &byte, 1, HAL_MAX_DELAY);
 
 #else
 
