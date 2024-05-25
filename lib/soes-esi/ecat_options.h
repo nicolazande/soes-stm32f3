@@ -1,11 +1,10 @@
 #ifndef __ECAT_OPTIONS_H__
 #define __ECAT_OPTIONS_H__
 
-#define USE_FOE          0
 #define USE_EOE          0
 
-#define MBXSIZE          512
-#define MBXSIZEBOOT      512
+#define MBXSIZE          0x200
+#define MBXSIZEBOOT      0x200
 #define MBXBUFFERS       3
 
 #define MBX0_sma         0x1000
@@ -27,16 +26,16 @@
 #define MBX1_smc_b       0x22
 
 #define SM2_sma          0x1600
-#define SM2_smc          0x24
+#define SM2_smc          0x64
 #define SM2_act          1
 #define SM3_sma          0x1A00
 #define SM3_smc          0x20
 #define SM3_act          1
 
-#define MAX_MAPPINGS_SM2 2
-#define MAX_MAPPINGS_SM3 5
+#define MAX_MAPPINGS_SM2 0x1A
+#define MAX_MAPPINGS_SM3 0x70
 
-#define MAX_RXPDO_SIZE   512
-#define MAX_TXPDO_SIZE   512
+#define MAX_RXPDO_SIZE   0x200
+#define MAX_TXPDO_SIZE   0x200
 
 #endif /* __ECAT_OPTIONS_H__ */
