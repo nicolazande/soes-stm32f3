@@ -58,37 +58,37 @@ const _objd SDO10F1[] =
 const _objd SDO1600[] =
 {
 	{0x00, DTYPE_UNSIGNED8, 8, ATYPE_RO, acNameDefault, 0x1A, NULL},
-    {0x01, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70000108, NULL}, //LED state [0]
-	{0x02, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70000208, NULL}, //LED state [1]
-	{0x03, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70000308, NULL}, //LED state [2]
-	{0x04, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70000408, NULL}, //LED state [3]
-	{0x05, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70000508, NULL}, //LED state [4]
-	{0x06, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70000608, NULL}, //LED state [5]
-	{0x07, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70000708, NULL}, //LED state [6]
-	{0x08, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70000808, NULL}, //LED state [7]
-    {0x09, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70010108, NULL}, //24V power supply state [0]
-	{0x0A, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70010208, NULL}, //24V power supply state [1]
-	{0x0B, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70010308, NULL}, //24V power supply state [2]
-	{0x0C, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70010408, NULL}, //24V power supply state [3]
-	{0x0D, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70010508, NULL}, //24V power supply state [4]
-	{0x0E, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70010608, NULL}, //24V power supply state [5]
-	{0x0F, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70010708, NULL}, //24V power supply state [6]
-	{0x10, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70010808, NULL}, //24V power supply state [7]
-    {0x11, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70020108, NULL}, //20V power supply state [0]
-	{0x12, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70020208, NULL}, //20V power supply state [1]
-	{0x13, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70020308, NULL}, //20V power supply state [2]
-	{0x14, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70020408, NULL}, //20V power supply state [3]
-	{0x15, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70020508, NULL}, //20V power supply state [4]
-	{0x16, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70020608, NULL}, //20V power supply state [5]
-	{0x17, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70020708, NULL}, //20V power supply state [6]
-	{0x18, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70020808, NULL}, //20V power supply state [7]
-    {0x19, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70030108, NULL}, //5V power supply state [0]
-	{0x1A, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70030208, NULL}, //5V power supply state [1]
+    {0x01, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70000108, NULL}, //LED state [0] RX
+	{0x02, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70000208, NULL}, //LED state [1] RX
+	{0x03, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70000308, NULL}, //LED state [2] RX
+	{0x04, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70000408, NULL}, //LED state [3] RX
+	{0x05, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70000508, NULL}, //LED state [4] RX
+	{0x06, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70000608, NULL}, //LED state [5] RX
+	{0x07, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70000708, NULL}, //LED state [6] RX
+	{0x08, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70000808, NULL}, //LED state [7] RX
+    {0x09, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70010108, NULL}, //24V power supply state [0] RX
+	{0x0A, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70010208, NULL}, //24V power supply state [1] RX
+	{0x0B, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70010308, NULL}, //24V power supply state [2] RX
+	{0x0C, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70010408, NULL}, //24V power supply state [3] RX
+	{0x0D, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70010508, NULL}, //24V power supply state [4] RX
+	{0x0E, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70010608, NULL}, //24V power supply state [5] RX
+	{0x0F, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70010708, NULL}, //24V power supply state [6] RX
+	{0x10, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70010808, NULL}, //24V power supply state [7] RX
+    {0x11, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70020108, NULL}, //20V power supply state [0] RX
+	{0x12, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70020208, NULL}, //20V power supply state [1] RX
+	{0x13, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70020308, NULL}, //20V power supply state [2] RX
+	{0x14, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70020408, NULL}, //20V power supply state [3] RX
+	{0x15, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70020508, NULL}, //20V power supply state [4] RX
+	{0x16, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70020608, NULL}, //20V power supply state [5] RX
+	{0x17, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70020708, NULL}, //20V power supply state [6] RX
+	{0x18, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70020808, NULL}, //20V power supply state [7] RX
+    {0x19, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70030108, NULL}, //5V power supply state [0] RX
+	{0x1A, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x70030208, NULL}, //5V power supply state [1] RX
 };
 
 const _objd SDO1A00[] =
 {
-	{0x00, DTYPE_UNSIGNED8, 8, ATYPE_RO, acNameDefault, 0x70, NULL},
+	{0x00, DTYPE_UNSIGNED8, 8, ATYPE_RO, acNameDefault, 0x8A, NULL},
 	{0x01, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x60000120, NULL}, //RTR temperature [0]
 	{0x02, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x60000220, NULL}, //RTR temperature [1]
 	{0x03, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x60000320, NULL}, //RTR temperature [2]
@@ -201,6 +201,32 @@ const _objd SDO1A00[] =
 	{0x6E, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x600A0410, NULL}, //Photo millivolts [3]
     {0x6F, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x600B0120, NULL}, //Pyrometer temperature [0]
 	{0x70, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x600B0220, NULL}, //Pyrometer temperature [1]
+	{0x71, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x600C0108, NULL}, //LED state [0] TX
+	{0x72, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x600C0208, NULL}, //LED state [1] TX
+	{0x73, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x600C0308, NULL}, //LED state [2] TX
+	{0x74, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x600C0408, NULL}, //LED state [3] TX
+	{0x75, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x600C0508, NULL}, //LED state [4] TX
+	{0x76, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x600C0608, NULL}, //LED state [5] TX
+	{0x77, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x600C0708, NULL}, //LED state [6] TX
+	{0x78, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x600C0808, NULL}, //LED state [7] TX
+	{0x79, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x600D0108, NULL}, //24V power supply state [0] TX
+	{0x7A, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x600D0208, NULL}, //24V power supply state [1] TX
+	{0x7B, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x600D0308, NULL}, //24V power supply state [2] TX
+	{0x7C, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x600D0408, NULL}, //24V power supply state [3] TX
+	{0x7D, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x600D0508, NULL}, //24V power supply state [4] TX
+	{0x7E, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x600D0608, NULL}, //24V power supply state [5] TX
+	{0x7F, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x600D0708, NULL}, //24V power supply state [6] TX
+	{0x80, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x600D0808, NULL}, //24V power supply state [7] TX
+	{0x81, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x600E0108, NULL}, //20V power supply state [0] TX
+	{0x82, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x600E0208, NULL}, //20V power supply state [1] TX
+	{0x83, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x600E0308, NULL}, //20V power supply state [2] TX
+	{0x84, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x600E0408, NULL}, //20V power supply state [3] TX
+	{0x85, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x600E0508, NULL}, //20V power supply state [4] TX
+	{0x86, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x600E0608, NULL}, //20V power supply state [5] TX
+	{0x87, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x600E0708, NULL}, //20V power supply state [6] TX
+	{0x88, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x600E0808, NULL}, //20V power supply state [7] TX
+	{0x89, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x600F0108, NULL}, //5V power supply state [0] TX
+	{0x8A, DTYPE_UNSIGNED32, 32, ATYPE_RO, acNameDefault, 0x600F0208, NULL}, //5V power supply state [1] TX
 };
 
 const _objd SDO1C00[] =
@@ -468,6 +494,52 @@ const _objd SDO600B[] =
 	{0x00, DTYPE_UNSIGNED8, 8, ATYPE_RO, acNameDefault, 2, NULL},
 	{0x01, DTYPE_REAL32, 32, ATYPE_RO | ATYPE_TXPDO, acNameDefault, 0, &Obj.pyro[0].temperature},
 	{0x02, DTYPE_REAL32, 32, ATYPE_RO | ATYPE_TXPDO, acNameDefault, 0, &Obj.pyro[1].temperature}
+};
+
+const _objd SDO600C[] =
+{
+	{0x00, DTYPE_UNSIGNED8, 8, ATYPE_RO, acNameDefault, 8, NULL},
+	{0x01, DTYPE_UNSIGNED8, 8, ATYPE_RW | ATYPE_TXPDO, acNameDefault, 0, &Obj.led[0].state},
+	{0x02, DTYPE_UNSIGNED8, 8, ATYPE_RW | ATYPE_TXPDO, acNameDefault, 0, &Obj.led[1].state},
+	{0x03, DTYPE_UNSIGNED8, 8, ATYPE_RW | ATYPE_TXPDO, acNameDefault, 0, &Obj.led[2].state},
+	{0x04, DTYPE_UNSIGNED8, 8, ATYPE_RW | ATYPE_TXPDO, acNameDefault, 0, &Obj.led[3].state},
+	{0x05, DTYPE_UNSIGNED8, 8, ATYPE_RW | ATYPE_TXPDO, acNameDefault, 0, &Obj.led[4].state},
+	{0x06, DTYPE_UNSIGNED8, 8, ATYPE_RW | ATYPE_TXPDO, acNameDefault, 0, &Obj.led[5].state},
+	{0x07, DTYPE_UNSIGNED8, 8, ATYPE_RW | ATYPE_TXPDO, acNameDefault, 0, &Obj.led[6].state},
+	{0x08, DTYPE_UNSIGNED8, 8, ATYPE_RW | ATYPE_TXPDO, acNameDefault, 0, &Obj.led[7].state}
+};
+
+const _objd SDO600D[] =
+{
+	{0x00, DTYPE_UNSIGNED8, 8, ATYPE_RO, acNameDefault, 8, NULL},
+	{0x01, DTYPE_UNSIGNED8, 8, ATYPE_RW | ATYPE_TXPDO, acNameDefault, 0, &Obj.power_24V[0].state},
+	{0x02, DTYPE_UNSIGNED8, 8, ATYPE_RW | ATYPE_TXPDO, acNameDefault, 0, &Obj.power_24V[1].state},
+	{0x03, DTYPE_UNSIGNED8, 8, ATYPE_RW | ATYPE_TXPDO, acNameDefault, 0, &Obj.power_24V[2].state},
+	{0x04, DTYPE_UNSIGNED8, 8, ATYPE_RW | ATYPE_TXPDO, acNameDefault, 0, &Obj.power_24V[3].state},
+	{0x05, DTYPE_UNSIGNED8, 8, ATYPE_RW | ATYPE_TXPDO, acNameDefault, 0, &Obj.power_24V[4].state},
+	{0x06, DTYPE_UNSIGNED8, 8, ATYPE_RW | ATYPE_TXPDO, acNameDefault, 0, &Obj.power_24V[5].state},
+	{0x07, DTYPE_UNSIGNED8, 8, ATYPE_RW | ATYPE_TXPDO, acNameDefault, 0, &Obj.power_24V[6].state},
+	{0x08, DTYPE_UNSIGNED8, 8, ATYPE_RW | ATYPE_TXPDO, acNameDefault, 0, &Obj.power_24V[7].state}
+};
+
+const _objd SDO600E[] =
+{
+	{0x00, DTYPE_UNSIGNED8, 8, ATYPE_RO, acNameDefault, 8, NULL},
+	{0x01, DTYPE_UNSIGNED8, 8, ATYPE_RW | ATYPE_TXPDO, acNameDefault, 0, &Obj.power_20V[0].state},
+	{0x02, DTYPE_UNSIGNED8, 8, ATYPE_RW | ATYPE_TXPDO, acNameDefault, 0, &Obj.power_20V[1].state},
+	{0x03, DTYPE_UNSIGNED8, 8, ATYPE_RW | ATYPE_TXPDO, acNameDefault, 0, &Obj.power_20V[2].state},
+	{0x04, DTYPE_UNSIGNED8, 8, ATYPE_RW | ATYPE_TXPDO, acNameDefault, 0, &Obj.power_20V[3].state},
+	{0x05, DTYPE_UNSIGNED8, 8, ATYPE_RW | ATYPE_TXPDO, acNameDefault, 0, &Obj.power_20V[4].state},
+	{0x06, DTYPE_UNSIGNED8, 8, ATYPE_RW | ATYPE_TXPDO, acNameDefault, 0, &Obj.power_20V[5].state},
+	{0x07, DTYPE_UNSIGNED8, 8, ATYPE_RW | ATYPE_TXPDO, acNameDefault, 0, &Obj.power_20V[6].state},
+	{0x08, DTYPE_UNSIGNED8, 8, ATYPE_RW | ATYPE_TXPDO, acNameDefault, 0, &Obj.power_20V[7].state}
+};
+
+const _objd SDO600F[] =
+{
+	{0x00, DTYPE_UNSIGNED8, 8, ATYPE_RO, acNameDefault, 2, NULL},
+	{0x01, DTYPE_UNSIGNED8, 8, ATYPE_RW | ATYPE_TXPDO, acNameDefault, 0, &Obj.power_5V[0].state},
+	{0x02, DTYPE_UNSIGNED8, 8, ATYPE_RW | ATYPE_TXPDO, acNameDefault, 0, &Obj.power_5V[1].state},
 };
 
 const _objd SDO7000[] =
@@ -897,7 +969,7 @@ const _objectlist SDOobjects[] =
 	{0x1018, OTYPE_RECORD, 4, 0, "Identity Object", SDO1018},
 	{0x10F1, OTYPE_RECORD, 2, 0, "ErrorSettings", SDO10F1},
 	{0x1600, OTYPE_RECORD, 0x1A, 0, "0x1600 PDO", SDO1600},
-	{0x1A00, OTYPE_RECORD, 0x70, 0, "0x1A00 PDO", SDO1A00},
+	{0x1A00, OTYPE_RECORD, 0x8A, 0, "0x1A00 PDO", SDO1A00},
 	{0x1C00, OTYPE_ARRAY, 4, 0, "Sync Manager Communication Type", SDO1C00},
 	{0x1C12, OTYPE_ARRAY, 1, 0, "Sync Manager 2 PDO Assignment", SDO1C12}, //SM2 to RXPDO mapping
 	{0x1C13, OTYPE_ARRAY, 1, 0, "Sync Manager 3 PDO Assignment", SDO1C13}, //SM3 to TXPDO mapping
@@ -915,10 +987,14 @@ const _objectlist SDOobjects[] =
 	{0x6009, OTYPE_RECORD, 1, 0, "IMU wz", SDO6009}, //IMU wz
 	{0x600A, OTYPE_RECORD, 4, 0, "Photo millivolts", SDO600A}, //Photo millivolts
 	{0x600B, OTYPE_RECORD, 2, 0, "Pyro temperature", SDO600B}, //Pyro temperature
-	{0x7000, OTYPE_RECORD, 8, 0, "LED state", SDO7000}, //LED state
-	{0x7001, OTYPE_RECORD, 8, 0, "Power 24V state", SDO7001}, //Power 24V state
-	{0x7002, OTYPE_RECORD, 8, 0, "Power 20V state", SDO7002}, //Power 20V state
-	{0x7003, OTYPE_RECORD, 2, 0, "Power 5V state", SDO7003}, //Power 5V state
+	{0x600C, OTYPE_RECORD, 8, 0, "LED state TX", SDO600C}, //LED state TX
+	{0x600D, OTYPE_RECORD, 8, 0, "Power 24V state TX", SDO600D}, //Power 24V state TX
+	{0x600E, OTYPE_RECORD, 8, 0, "Power 20V state TX", SDO600E}, //Power 20V state TX
+	{0x600F, OTYPE_RECORD, 2, 0, "Power 5V state TX", SDO600F}, //Power 5V state TX
+	{0x7000, OTYPE_RECORD, 8, 0, "LED state RX", SDO7000}, //LED state RX
+	{0x7001, OTYPE_RECORD, 8, 0, "Power 24V state RX", SDO7001}, //Power 24V state RX
+	{0x7002, OTYPE_RECORD, 8, 0, "Power 20V state RX", SDO7002}, //Power 20V state RX
+	{0x7003, OTYPE_RECORD, 2, 0, "Power 5V state RX", SDO7003}, //Power 5V state RX
 	{0x8000, OTYPE_RECORD, 0x19, 0, "RTR filter", SDO8000}, //RTR filter
 	{0x8001, OTYPE_RECORD, 0x19, 0, "RTR val_2", SDO8001}, //RTR val_2
 	{0x8002, OTYPE_RECORD, 0x19, 0, "RTR val_3", SDO8002}, //RTR val_s
