@@ -8,6 +8,17 @@
 
 
 /****************************************************************
+ * Defines
+ ****************************************************************/
+#define EC_NUM_RTR (25U)   //number of associated RTDs
+#define EC_NUM_IMU (1U)    //number of associated IMUs
+#define EC_NUM_PHOTO (1U)  //number of associated photo diodes
+#define EC_NUM_PYRO (1U)   //number of associated pyrometers
+
+
+
+
+/****************************************************************
  * Custom data
  ****************************************************************/
 /** RTD sensor data */
@@ -18,18 +29,6 @@ struct rtd_t
 	uint16_t low_fault;
 	uint16_t fault_status;
 	uint8_t filter;
-	/** TODO: rename the following fields (also in objectlist.c) */
-	float val_2;
-	float val_3;
-	float val_4;
-	float val_5;
-	float val_6;
-	float val_7;
-	float val_8;
-	float val_9;
-	float val_10;
-	float val_11;
-	float val_12;
 };
 
 /** IMU data */
@@ -41,8 +40,6 @@ struct imu_t
 	float wx;
 	float wy;
 	float wz;
-	/** TODO: rename the following fields (also in objectlist.c) */
-	float val_1;
 };
 
 /** photo diode data */
@@ -77,9 +74,9 @@ struct power_t
 typedef struct
 {
 	/** custom data */
-    struct rtd_t rtd[25]; //RTD sensor
-    struct imu_t imu[1]; //IMU
-    struct photo_t photo[4]; //Photo diode
+    struct rtd_t rtd[EC_NUM_RTR]; //RTD sensor
+    struct imu_t imu[EC_NUM_IMU]; //IMU
+    struct photo_t photo[EC_NUM_PHOTO]; //Photo diode
     struct pyro_t pyro[2]; //Pyrometer
     struct led_t led[8]; //Led
     struct power_t power_24V[8]; //24V power supply

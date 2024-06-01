@@ -1,0 +1,531 @@
+<?xml version="1.0"?>
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.56">
+	<Project ProjectGUID="{7A16C16C-8665-4514-83E1-CC09DB9229FA}" Target64Bit="true" ShowHideConfigurations="#x6">
+		<Io>
+			<Device Id="1" DevType="111" DevFlags="#x0003" AmsPort="28673" AmsNetId="192.168.74.1.2.1" RemoteName="ecmaster" InfoImageId="2">
+				<Name>__FILENAME__</Name>
+				<AddressInfo>
+					<Pnp>
+						<DeviceDesc>Ethernet (TwinCAT-Intel PCI Ethernet Adapter (Gigab</DeviceDesc>
+						<DeviceName>\DEVICE\{18075AC7-E27C-49C8-9DD1-F89FA8CE6EEB}</DeviceName>
+						<DeviceData>482ae343b1ba</DeviceData>
+					</Pnp>
+				</AddressInfo>
+				<Image Id="1" AddrType="9" ImageType="3">
+					<Name>Image</Name>
+				</Image>
+				<Box Id="1" BoxType="9099" BoxFlags="#x00000020">
+					<Name>LAN9252_SPI</Name>
+					<ImageId>65</ImageId>
+					<EtherCAT SlaveType="2" PdiType="#x0e80" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="35" VendorId="#x00000ee1" ProductCode="#x00009252" RevisionNo="#x00000001" InfoDataAddr="true" PortPhys="17" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="lan9252_spi" Desc="lan9252_spi" PortABoxInfo="#x00ffffff">
+						<SyncMan>001000022600010001000000000000000002001026010000</SyncMan>
+						<SyncMan>001200022200010002000000000000000002001222010000</SyncMan>
+						<SyncMan>00161a006400010003000000000000001a00001664010000</SyncMan>
+						<SyncMan>001a3c012000010004000000000000003c01001a20010000</SyncMan>
+						<Fmmu>0000000000000000001600020100000001000000000000000000000000000000</Fmmu>
+						<Fmmu>0000000000000000001a00010100000002000000000000000000000000000000</Fmmu>
+						<Fmmu>00000000000000000d0800010100000003000000000000000000000000000000</Fmmu>
+						<DcMode>53796e6368726f6e000000000000000053796e6368726f6e000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</DcMode>
+						<Pdo Name="P1A00" Index="#x1a00" Flags="#x0000" SyncMan="3">
+							<Entry Name="E6000:01" Index="#x6000" Sub="#x01">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="E6000:02" Index="#x6000" Sub="#x02">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="E6000:03" Index="#x6000" Sub="#x03">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="E6000:04" Index="#x6000" Sub="#x04">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="E6000:05" Index="#x6000" Sub="#x05">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="E6000:06" Index="#x6000" Sub="#x06">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="E6000:07" Index="#x6000" Sub="#x07">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="E6000:08" Index="#x6000" Sub="#x08">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="E6000:09" Index="#x6000" Sub="#x09">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="E6000:0A" Index="#x6000" Sub="#x0a">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="E6000:0B" Index="#x6000" Sub="#x0b">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="E6000:0C" Index="#x6000" Sub="#x0c">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="E6000:0D" Index="#x6000" Sub="#x0d">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="E6000:0E" Index="#x6000" Sub="#x0e">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="E6000:0F" Index="#x6000" Sub="#x0f">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="E6000:10" Index="#x6000" Sub="#x10">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="E6000:11" Index="#x6000" Sub="#x11">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="E6000:12" Index="#x6000" Sub="#x12">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="E6000:13" Index="#x6000" Sub="#x13">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="E6000:14" Index="#x6000" Sub="#x14">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="E6000:15" Index="#x6000" Sub="#x15">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="E6000:16" Index="#x6000" Sub="#x16">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="E6000:17" Index="#x6000" Sub="#x17">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="E6000:18" Index="#x6000" Sub="#x18">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="E6000:19" Index="#x6000" Sub="#x19">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="E6001:01" Index="#x6001" Sub="#x01">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6001:02" Index="#x6001" Sub="#x02">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6001:03" Index="#x6001" Sub="#x03">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6001:04" Index="#x6001" Sub="#x04">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6001:05" Index="#x6001" Sub="#x05">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6001:06" Index="#x6001" Sub="#x06">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6001:07" Index="#x6001" Sub="#x07">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6001:08" Index="#x6001" Sub="#x08">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6001:09" Index="#x6001" Sub="#x09">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6001:0A" Index="#x6001" Sub="#x0a">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6001:0B" Index="#x6001" Sub="#x0b">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6001:0C" Index="#x6001" Sub="#x0c">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6001:0D" Index="#x6001" Sub="#x0d">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6001:0E" Index="#x6001" Sub="#x0e">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6001:0F" Index="#x6001" Sub="#x0f">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6001:10" Index="#x6001" Sub="#x10">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6001:11" Index="#x6001" Sub="#x11">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6001:12" Index="#x6001" Sub="#x12">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6001:13" Index="#x6001" Sub="#x13">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6001:14" Index="#x6001" Sub="#x14">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6001:15" Index="#x6001" Sub="#x15">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6001:16" Index="#x6001" Sub="#x16">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6001:17" Index="#x6001" Sub="#x17">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6001:18" Index="#x6001" Sub="#x18">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6001:19" Index="#x6001" Sub="#x19">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6002:01" Index="#x6002" Sub="#x01">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6002:02" Index="#x6002" Sub="#x02">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6002:03" Index="#x6002" Sub="#x03">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6002:04" Index="#x6002" Sub="#x04">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6002:05" Index="#x6002" Sub="#x05">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6002:06" Index="#x6002" Sub="#x06">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6002:07" Index="#x6002" Sub="#x07">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6002:08" Index="#x6002" Sub="#x08">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6002:09" Index="#x6002" Sub="#x09">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6002:0A" Index="#x6002" Sub="#x0a">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6002:0B" Index="#x6002" Sub="#x0b">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6002:0C" Index="#x6002" Sub="#x0c">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6002:0D" Index="#x6002" Sub="#x0d">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6002:0E" Index="#x6002" Sub="#x0e">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6002:0F" Index="#x6002" Sub="#x0f">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6002:10" Index="#x6002" Sub="#x10">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6002:11" Index="#x6002" Sub="#x11">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6002:12" Index="#x6002" Sub="#x12">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6002:13" Index="#x6002" Sub="#x13">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6002:14" Index="#x6002" Sub="#x14">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6002:15" Index="#x6002" Sub="#x15">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6002:16" Index="#x6002" Sub="#x16">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6002:17" Index="#x6002" Sub="#x17">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6002:18" Index="#x6002" Sub="#x18">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6002:19" Index="#x6002" Sub="#x19">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6003:01" Index="#x6003" Sub="#x01">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6003:02" Index="#x6003" Sub="#x02">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6003:03" Index="#x6003" Sub="#x03">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6003:04" Index="#x6003" Sub="#x04">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6003:05" Index="#x6003" Sub="#x05">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6003:06" Index="#x6003" Sub="#x06">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6003:07" Index="#x6003" Sub="#x07">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6003:08" Index="#x6003" Sub="#x08">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6003:09" Index="#x6003" Sub="#x09">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6003:0A" Index="#x6003" Sub="#x0a">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6003:0B" Index="#x6003" Sub="#x0b">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6003:0C" Index="#x6003" Sub="#x0c">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6003:0D" Index="#x6003" Sub="#x0d">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6003:0E" Index="#x6003" Sub="#x0e">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6003:0F" Index="#x6003" Sub="#x0f">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6003:10" Index="#x6003" Sub="#x10">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6003:11" Index="#x6003" Sub="#x11">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6003:12" Index="#x6003" Sub="#x12">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6003:13" Index="#x6003" Sub="#x13">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6003:14" Index="#x6003" Sub="#x14">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6003:15" Index="#x6003" Sub="#x15">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6003:16" Index="#x6003" Sub="#x16">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6003:17" Index="#x6003" Sub="#x17">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6003:18" Index="#x6003" Sub="#x18">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6003:19" Index="#x6003" Sub="#x19">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E6004:01" Index="#x6004" Sub="#x01">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="E6005:01" Index="#x6005" Sub="#x01">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="E6006:01" Index="#x6006" Sub="#x01">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="E6007:01" Index="#x6007" Sub="#x01">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="E6008:01" Index="#x6008" Sub="#x01">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="E6009:01" Index="#x6009" Sub="#x01">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="E600A:01" Index="#x600a" Sub="#x01">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E600A:02" Index="#x600a" Sub="#x02">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E600A:03" Index="#x600a" Sub="#x03">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E600A:04" Index="#x600a" Sub="#x04">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="E600B:01" Index="#x600b" Sub="#x01">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="E600B:02" Index="#x600b" Sub="#x02">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="E600C:01" Index="#x600c" Sub="#x01">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E600C:02" Index="#x600c" Sub="#x02">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E600C:03" Index="#x600c" Sub="#x03">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E600C:04" Index="#x600c" Sub="#x04">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E600C:05" Index="#x600c" Sub="#x05">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E600C:06" Index="#x600c" Sub="#x06">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E600C:07" Index="#x600c" Sub="#x07">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E600C:08" Index="#x600c" Sub="#x08">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E600D:01" Index="#x600d" Sub="#x01">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E600D:02" Index="#x600d" Sub="#x02">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E600D:03" Index="#x600d" Sub="#x03">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E600D:04" Index="#x600d" Sub="#x04">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E600D:05" Index="#x600d" Sub="#x05">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E600D:06" Index="#x600d" Sub="#x06">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E600D:07" Index="#x600d" Sub="#x07">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E600D:08" Index="#x600d" Sub="#x08">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E600E:01" Index="#x600e" Sub="#x01">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E600E:02" Index="#x600e" Sub="#x02">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E600E:03" Index="#x600e" Sub="#x03">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E600E:04" Index="#x600e" Sub="#x04">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E600E:05" Index="#x600e" Sub="#x05">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E600E:06" Index="#x600e" Sub="#x06">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E600E:07" Index="#x600e" Sub="#x07">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E600E:08" Index="#x600e" Sub="#x08">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E600F:01" Index="#x600f" Sub="#x01">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E600F:02" Index="#x600f" Sub="#x02">
+								<Type>USINT</Type>
+							</Entry>
+						</Pdo>
+						<Pdo Name="P1600" Index="#x1600" InOut="1" Flags="#x0000" SyncMan="2">
+							<Entry Name="E7000:01" Index="#x7000" Sub="#x01">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E7000:02" Index="#x7000" Sub="#x02">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E7000:03" Index="#x7000" Sub="#x03">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E7000:04" Index="#x7000" Sub="#x04">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E7000:05" Index="#x7000" Sub="#x05">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E7000:06" Index="#x7000" Sub="#x06">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E7000:07" Index="#x7000" Sub="#x07">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E7000:08" Index="#x7000" Sub="#x08">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E7001:01" Index="#x7001" Sub="#x01">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E7001:02" Index="#x7001" Sub="#x02">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E7001:03" Index="#x7001" Sub="#x03">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E7002:04" Index="#x7001" Sub="#x04">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E7001:05" Index="#x7001" Sub="#x05">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E7001:06" Index="#x7001" Sub="#x06">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E7001:07" Index="#x7001" Sub="#x07">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E7001:08" Index="#x7001" Sub="#x08">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E7002:01" Index="#x7002" Sub="#x01">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E7002:02" Index="#x7002" Sub="#x02">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E7002:03" Index="#x7002" Sub="#x03">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E7002:04" Index="#x7002" Sub="#x04">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E7002:05" Index="#x7002" Sub="#x05">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E7002:06" Index="#x7002" Sub="#x06">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E7002:07" Index="#x7002" Sub="#x07">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E7002:08" Index="#x7002" Sub="#x08">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E7003:01" Index="#x7003" Sub="#x01">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="E7003:02" Index="#x7003" Sub="#x02">
+								<Type>USINT</Type>
+							</Entry>
+						</Pdo>
+					</EtherCAT>
+				</Box>
+				<EtherCAT/>
+			</Device>
+		</Io>
+	</Project>
+</TcSmProject>
