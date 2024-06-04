@@ -12,10 +12,12 @@
  ****************************************************************/
 #define EC_NUM_RTR (25U)   //number of associated RTDs
 #define EC_NUM_IMU (1U)    //number of associated IMUs
-#define EC_NUM_PHOTO (1U)  //number of associated photo diodes
-#define EC_NUM_PYRO (1U)   //number of associated pyrometers
-
-
+#define EC_NUM_PHOTO (4U)  //number of associated photo diodes
+#define EC_NUM_PYRO (2U)   //number of associated pyrometers
+#define EC_NUM_LED (8U)    //number of associated leds
+#define EC_NUM_POWER_SUPPLY_24V (8U) //number of associated power supply 24V
+#define EC_NUM_POWER_SUPPLY_20V (8U) //number of associated power supply 20V
+#define EC_NUM_POWER_SUPPLY_5V (2U)  //number of associated power supply 5V
 
 
 /****************************************************************
@@ -77,11 +79,11 @@ typedef struct
     struct rtd_t rtd[EC_NUM_RTR]; //RTD sensor
     struct imu_t imu[EC_NUM_IMU]; //IMU
     struct photo_t photo[EC_NUM_PHOTO]; //Photo diode
-    struct pyro_t pyro[2]; //Pyrometer
-    struct led_t led[8]; //Led
-    struct power_t power_24V[8]; //24V power supply
-    struct power_t power_20V[8]; //20V power supply
-    struct power_t power_5V[2]; //5V power supply
+    struct pyro_t pyro[EC_NUM_PYRO]; //Pyrometer
+    struct led_t led[EC_NUM_LED]; //Led
+    struct power_t power_24V[EC_NUM_POWER_SUPPLY_24V]; //24V power supply
+    struct power_t power_20V[EC_NUM_POWER_SUPPLY_20V]; //20V power supply
+    struct power_t power_5V[EC_NUM_POWER_SUPPLY_5V]; //5V power supply
     /** standard data */
     uint8_t Error_register;
     struct

@@ -524,7 +524,7 @@
 						</Pdo>
 					</EtherCAT>
 				</Box>
-				<EtherCAT/>
+				<EtherCAT FreerunCycle="10"/>
 			</Device>
 		</Io>
 	</Project>
