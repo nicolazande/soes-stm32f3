@@ -27,10 +27,7 @@
 struct rtd_t
 {
 	float temperature;
-	uint16_t high_fault;
-	uint16_t low_fault;
 	uint16_t fault_status;
-	uint8_t filter;
 };
 
 /** IMU data */
@@ -77,7 +74,9 @@ typedef struct
 {
 	/** custom data */
     struct rtd_t rtd[EC_NUM_RTR]; //RTD sensor
+    uint8_t rtd_filter; //RTD 50/60Hz filter
     struct imu_t imu[EC_NUM_IMU]; //IMU
+    uint8_t imu_odr; //IMU odr
     struct photo_t photo[EC_NUM_PHOTO]; //Photo diode
     struct pyro_t pyro[EC_NUM_PYRO]; //Pyrometer
     struct led_t led[EC_NUM_LED]; //Led

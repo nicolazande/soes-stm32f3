@@ -115,9 +115,7 @@ void cb_get_inputs(){}
 void cb_set_outputs()
 {
 	/* test some values */
-	static uint8_t i = 0;
-	Obj.rtd[i].filter++;
-	i = (i + 1) % 25;
+	Obj.rtd_filter++;
 }
 
 

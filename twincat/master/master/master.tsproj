@@ -1,0 +1,381 @@
+<?xml version="1.0"?>
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.56">
+	<Project ProjectGUID="{56B873E1-434A-4E45-981F-EC0144C56FAE}" Target64Bit="true" ShowHideConfigurations="#x6">
+		<Io>
+			<Device Id="1" DevType="111" DevFlags="#x0003" AmsPort="28673" AmsNetId="192.168.74.1.2.1" RemoteName="master" InfoImageId="2">
+				<Name>__FILENAME__</Name>
+				<AddressInfo>
+					<Pnp>
+						<DeviceDesc>Ethernet (TwinCAT-Intel PCI Ethernet Adapter (Gigab</DeviceDesc>
+						<DeviceName>\DEVICE\{18075AC7-E27C-49C8-9DD1-F89FA8CE6EEB}</DeviceName>
+						<DeviceData>482ae343b1ba</DeviceData>
+					</Pnp>
+				</AddressInfo>
+				<Image Id="1" AddrType="9" ImageType="3">
+					<Name>Image</Name>
+				</Image>
+				<Box Id="1" BoxType="9099" BoxFlags="#x00000020">
+					<Name>LAN9252</Name>
+					<ImageId>65</ImageId>
+					<EtherCAT SlaveType="2" PdiType="#x0e80" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="35" VendorId="#x00000ee1" ProductCode="#x00009252" RevisionNo="#x00000001" InfoDataAddr="true" PortPhys="17" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="lan9252_spi" Desc="lan9252_spi" PortABoxInfo="#x00ffffff">
+						<SyncMan>001000022600010001000000000000000002001026010000</SyncMan>
+						<SyncMan>001200022200010002000000000000000002001222010000</SyncMan>
+						<SyncMan>00161a006400010003000000000000001a00001664030000</SyncMan>
+						<SyncMan>001ad8002000010004000000000000003c01001a20030000</SyncMan>
+						<Fmmu>0000000000000000001600020100000001000000000000000000000000000000</Fmmu>
+						<Fmmu>0000000000000000001a00010100000002000000000000000000000000000000</Fmmu>
+						<Fmmu>00000000000000000d0800010100000003000000000000000000000000000000</Fmmu>
+						<DcMode>53796e6368726f6e000000000000000053796e6368726f6e000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</DcMode>
+						<Pdo Name="0x1A00 PDO" Index="#x1a00" Flags="#x0011" SyncMan="3">
+							<Entry Name="object" Index="#x6000" Sub="#x01">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6000" Sub="#x02">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6000" Sub="#x03">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6000" Sub="#x04">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6000" Sub="#x05">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6000" Sub="#x06">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6000" Sub="#x07">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6000" Sub="#x08">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6000" Sub="#x09">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6000" Sub="#x0a">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6000" Sub="#x0b">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6000" Sub="#x0c">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6000" Sub="#x0d">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6000" Sub="#x0e">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6000" Sub="#x0f">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6000" Sub="#x10">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6000" Sub="#x11">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6000" Sub="#x12">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6000" Sub="#x13">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6000" Sub="#x14">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6000" Sub="#x15">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6000" Sub="#x16">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6000" Sub="#x17">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6000" Sub="#x18">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6000" Sub="#x19">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6001" Sub="#x01">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6001" Sub="#x02">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6001" Sub="#x03">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6001" Sub="#x04">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6001" Sub="#x05">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6001" Sub="#x06">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6001" Sub="#x07">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6001" Sub="#x08">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6001" Sub="#x09">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6001" Sub="#x0a">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6001" Sub="#x0b">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6001" Sub="#x0c">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6001" Sub="#x0d">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6001" Sub="#x0e">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6001" Sub="#x0f">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6001" Sub="#x10">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6001" Sub="#x11">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6001" Sub="#x12">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6001" Sub="#x13">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6001" Sub="#x14">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6001" Sub="#x15">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6001" Sub="#x16">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6001" Sub="#x17">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6001" Sub="#x18">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6001" Sub="#x19">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6002" Sub="#x01">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6003" Sub="#x01">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6004" Sub="#x01">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6005" Sub="#x01">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6006" Sub="#x01">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6007" Sub="#x01">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6008" Sub="#x01">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6008" Sub="#x02">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6008" Sub="#x03">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6008" Sub="#x04">
+								<Type>UINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6009" Sub="#x01">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="object" Index="#x6009" Sub="#x02">
+								<Type>REAL</Type>
+							</Entry>
+							<Entry Name="object" Index="#x600a" Sub="#x01">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x600a" Sub="#x02">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x600a" Sub="#x03">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x600a" Sub="#x04">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x600a" Sub="#x05">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x600a" Sub="#x06">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x600a" Sub="#x07">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x600a" Sub="#x08">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x600b" Sub="#x01">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x600b" Sub="#x02">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x600b" Sub="#x03">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x600b" Sub="#x04">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x600b" Sub="#x05">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x600b" Sub="#x06">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x600b" Sub="#x07">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x600b" Sub="#x08">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x600c" Sub="#x01">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x600c" Sub="#x02">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x600c" Sub="#x03">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x600c" Sub="#x04">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x600c" Sub="#x05">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x600c" Sub="#x06">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x600c" Sub="#x07">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x600c" Sub="#x08">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x600d" Sub="#x01">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x600d" Sub="#x02">
+								<Type>USINT</Type>
+							</Entry>
+						</Pdo>
+						<Pdo Name="0x1600 PDO" Index="#x1600" InOut="1" Flags="#x0011" SyncMan="2">
+							<Entry Name="object" Index="#x7000" Sub="#x01">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x7000" Sub="#x02">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x7000" Sub="#x03">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x7000" Sub="#x04">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x7000" Sub="#x05">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x7000" Sub="#x06">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x7000" Sub="#x07">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x7000" Sub="#x08">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x7001" Sub="#x01">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x7001" Sub="#x02">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x7001" Sub="#x03">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x7001" Sub="#x04">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x7001" Sub="#x05">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x7001" Sub="#x06">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x7001" Sub="#x07">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x7001" Sub="#x08">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x7002" Sub="#x01">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x7002" Sub="#x02">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x7002" Sub="#x03">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x7002" Sub="#x04">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x7002" Sub="#x05">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x7002" Sub="#x06">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x7002" Sub="#x07">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x7002" Sub="#x08">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x7003" Sub="#x01">
+								<Type>USINT</Type>
+							</Entry>
+							<Entry Name="object" Index="#x7003" Sub="#x02">
+								<Type>USINT</Type>
+							</Entry>
+						</Pdo>
+					</EtherCAT>
+				</Box>
+				<EtherCAT FreerunCycle="10"/>
+			</Device>
+		</Io>
+	</Project>
+</TcSmProject>
