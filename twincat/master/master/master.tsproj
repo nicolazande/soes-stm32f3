@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.56">
-	<Project ProjectGUID="{56B873E1-434A-4E45-981F-EC0144C56FAE}" Target64Bit="true" ShowHideConfigurations="#x6">
+	<Project ProjectGUID="{95404F6A-1431-4EAB-92C5-DED19208F849}" Target64Bit="true" ShowHideConfigurations="#x6">
 		<Io>
-			<Device Id="1" DevType="111" DevFlags="#x0003" AmsPort="28673" AmsNetId="192.168.74.1.2.1" RemoteName="master" InfoImageId="2">
-				<Name>__FILENAME__</Name>
+			<Device Id="1" DevType="111" DevFlags="#x0003" AmsPort="28673" AmsNetId="192.168.74.1.2.1" RemoteName="Device 1 (EtherCAT)" InfoImageId="2">
+				<Name>Device 1 (EtherCAT)</Name>
 				<AddressInfo>
 					<Pnp>
 						<DeviceDesc>Ethernet (TwinCAT-Intel PCI Ethernet Adapter (Gigab</DeviceDesc>
@@ -14,14 +14,14 @@
 				<Image Id="1" AddrType="9" ImageType="3">
 					<Name>Image</Name>
 				</Image>
-				<Box Id="1" BoxType="9099" BoxFlags="#x00000020">
+				<Box Id="1" BoxType="9099">
 					<Name>LAN9252</Name>
-					<ImageId>65</ImageId>
+					<ImageId>114</ImageId>
 					<EtherCAT SlaveType="2" PdiType="#x0e80" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="35" VendorId="#x00000ee1" ProductCode="#x00009252" RevisionNo="#x00000001" InfoDataAddr="true" PortPhys="17" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="lan9252_spi" Desc="lan9252_spi" PortABoxInfo="#x00ffffff">
 						<SyncMan>001000022600010001000000000000000002001026010000</SyncMan>
 						<SyncMan>001200022200010002000000000000000002001222010000</SyncMan>
 						<SyncMan>00161a006400010003000000000000001a00001664030000</SyncMan>
-						<SyncMan>001ad8002000010004000000000000003c01001a20030000</SyncMan>
+						<SyncMan>001ad800200001000400000000000000d800001a20030000</SyncMan>
 						<Fmmu>0000000000000000001600020100000001000000000000000000000000000000</Fmmu>
 						<Fmmu>0000000000000000001a00010100000002000000000000000000000000000000</Fmmu>
 						<Fmmu>00000000000000000d0800010100000003000000000000000000000000000000</Fmmu>
@@ -374,7 +374,7 @@
 						</Pdo>
 					</EtherCAT>
 				</Box>
-				<EtherCAT FreerunCycle="10"/>
+				<EtherCAT/>
 			</Device>
 		</Io>
 	</Project>

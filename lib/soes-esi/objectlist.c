@@ -56,6 +56,11 @@ const _objd SDO10F1[] =
   {0x02, DTYPE_UNSIGNED16, 16, ATYPE_RW, acNameDefault, 4, &Obj.ErrorSettings.SyncErrorCounterLimit},
 };
 
+const _objd SDO10F8[] =
+{
+  {0x0, DTYPE_UNSIGNED64, 64, ATYPE_RW, acNameDefault, 0, NULL},
+};
+
 const _objd SDO1600[] =
 {
 	{0x00, DTYPE_UNSIGNED8, 8, ATYPE_RO, acNameDefault, 0x1A, NULL},
@@ -488,7 +493,25 @@ const _objd SDO8000[] =
 const _objd SDO8001[] =
 {
 	{0x00, DTYPE_UNSIGNED8, 8, ATYPE_RO, acNameDefault, 1, NULL},
+	{0x01, DTYPE_UNSIGNED16, 16, ATYPE_RW, acNameDefault, 0, &Obj.rtd_high_thresh},
+};
+
+const _objd SDO8002[] =
+{
+	{0x00, DTYPE_UNSIGNED8, 8, ATYPE_RO, acNameDefault, 1, NULL},
+	{0x01, DTYPE_UNSIGNED16, 16, ATYPE_RW, acNameDefault, 0, &Obj.rtd_low_thresh},
+};
+
+const _objd SDO8003[] =
+{
+	{0x00, DTYPE_UNSIGNED8, 8, ATYPE_RO, acNameDefault, 1, NULL},
 	{0x01, DTYPE_UNSIGNED8, 8, ATYPE_RW, acNameDefault, 0, &Obj.imu_odr},
+};
+
+const _objd SDO8004[] =
+{
+	{0x00, DTYPE_UNSIGNED8, 8, ATYPE_RO, acNameDefault, 1, NULL},
+	{0x01, DTYPE_UNSIGNED8, 8, ATYPE_RW, acNameDefault, 0, &Obj.imu_full_scale},
 };
 
 
@@ -505,6 +528,7 @@ const _objectlist SDOobjects[] =
 	{0x100A, OTYPE_VAR, 0, 0, "Software Version", SDO100A},
 	{0x1018, OTYPE_RECORD, 4, 0, "Identity Object", SDO1018},
 	{0x10F1, OTYPE_RECORD, 2, 0, "ErrorSettings", SDO10F1},
+	{0x10F8, OTYPE_VAR, 0, 0, "Timestamp Object", SDO10F8},
 	{0x1600, OTYPE_RECORD, 0x1A, 0, "0x1600 PDO", SDO1600},
 	{0x1A00, OTYPE_RECORD, 0x58, 0, "0x1A00 PDO", SDO1A00},
 	{0x1C00, OTYPE_ARRAY, 4, 0, "Sync Manager Communication Type", SDO1C00},
@@ -531,6 +555,9 @@ const _objectlist SDOobjects[] =
 	{0x7002, OTYPE_RECORD, 8, 0, "Power 20V state RX", SDO7002}, //Power 20V state RX
 	{0x7003, OTYPE_RECORD, 2, 0, "Power 5V state RX", SDO7003}, //Power 5V state RX
 	{0x8000, OTYPE_RECORD, 1, 0, "RTD 50/60 Hz Filter", SDO8000}, //RTD filter
-	{0x8001, OTYPE_RECORD, 1, 0, "IMU Data Rate", SDO8001}, //IMU odr
+	{0x8001, OTYPE_RECORD, 1, 0, "RTD High Threshold", SDO8001}, //RTD High Threshold
+	{0x8002, OTYPE_RECORD, 1, 0, "RTD Low Threshold", SDO8002}, //RTD Low Threshold
+	{0x8003, OTYPE_RECORD, 1, 0, "IMU Data Rate", SDO8003}, //IMU odr
+	{0x8004, OTYPE_RECORD, 1, 0, "IMU Full Scale", SDO8004}, //IMU Resolution
 	{0xffff, 0xff, 0xff, 0xff, NULL, NULL}
 };

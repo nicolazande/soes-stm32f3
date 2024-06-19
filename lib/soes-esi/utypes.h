@@ -75,8 +75,11 @@ typedef struct
 	/** custom data */
     struct rtd_t rtd[EC_NUM_RTR]; //RTD sensor
     uint8_t rtd_filter; //RTD 50/60Hz filter
+    uint16_t rtd_low_thresh; //RTD low threshold
+    uint16_t rtd_high_thresh; //RTD high threshold
     struct imu_t imu[EC_NUM_IMU]; //IMU
     uint8_t imu_odr; //IMU odr
+    uint8_t imu_full_scale; //IMU Resolution
     struct photo_t photo[EC_NUM_PHOTO]; //Photo diode
     struct pyro_t pyro[EC_NUM_PYRO]; //Pyrometer
     struct led_t led[EC_NUM_LED]; //Led
